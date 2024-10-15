@@ -1,0 +1,26 @@
+{
+    "sourceFile": "js/router.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1728990409906,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1729002255407,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,4 @@\n-// js/router.js\r\n export class Router {\r\n     constructor(routes) {\r\n         this.routes = routes;\r\n         this.navigate = this.navigate.bind(this);\r\n@@ -12,9 +11,19 @@\n         console.log('Current path:', path);\r\n         const route = this.routes.find(route => route.path === path) || this.routes.find(route => route.path === '/');\r\n         if (route) {\r\n             console.log('Rendering route:', route.path);\r\n-            route.component();\r\n+            if (route.path === '/') {\r\n+                // For the home route, show the Vue app and hide the JS app\r\n+                document.getElementById('vue-app').style.display = 'block';\r\n+                document.getElementById('js-app').style.display = 'none';\r\n+            } else {\r\n+                // For other routes, hide the Vue app and show the JS app\r\n+                document.getElementById('vue-app').style.display = 'none';\r\n+                document.getElementById('js-app').style.display = 'block';\r\n+                document.getElementById('js-app').innerHTML = ''; // Clear previous content\r\n+                route.component();\r\n+            }\r\n         } else {\r\n             console.error('Route not found for path:', path);\r\n         }\r\n     }\r\n"
+                },
+                {
+                    "date": 1729002964470,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,24 +11,36 @@\n         console.log('Current path:', path);\r\n         const route = this.routes.find(route => route.path === path) || this.routes.find(route => route.path === '/');\r\n         if (route) {\r\n             console.log('Rendering route:', route.path);\r\n-            if (route.path === '/') {\r\n-                // For the home route, show the Vue app and hide the JS app\r\n-                document.getElementById('vue-app').style.display = 'block';\r\n-                document.getElementById('js-app').style.display = 'none';\r\n+            if (route.vueComponent) {\r\n+                // Handle Vue component\r\n+                this.renderVueComponent(route.vueComponent);\r\n             } else {\r\n-                // For other routes, hide the Vue app and show the JS app\r\n-                document.getElementById('vue-app').style.display = 'none';\r\n-                document.getElementById('js-app').style.display = 'block';\r\n-                document.getElementById('js-app').innerHTML = ''; // Clear previous content\r\n-                route.component();\r\n+                // Handle vanilla JS component\r\n+                this.renderJSComponent(route.component);\r\n             }\r\n         } else {\r\n             console.error('Route not found for path:', path);\r\n         }\r\n     }\r\n \r\n+    renderVueComponent(component) {\r\n+        const appElement = document.getElementById('vue-app');\r\n+        appElement.style.display = 'block';\r\n+        document.getElementById('js-app').style.display = 'none';\r\n+        window.vueApp.component('current-page', component);\r\n+        window.vueApp.mount('#vue-app');\r\n+    }\r\n+\r\n+    renderJSComponent(component) {\r\n+        const jsAppElement = document.getElementById('js-app');\r\n+        jsAppElement.style.display = 'block';\r\n+        document.getElementById('vue-app').style.display = 'none';\r\n+        jsAppElement.innerHTML = '';\r\n+        component();\r\n+    }\r\n+\r\n     push(path) {\r\n         console.log('Pushing new path:', path);\r\n         window.history.pushState(null, '', path);\r\n         this.navigate();\r\n"
+                }
+            ],
+            "date": 1728990409906,
+            "name": "Commit-0",
+            "content": "// js/router.js\r\nexport class Router {\r\n    constructor(routes) {\r\n        this.routes = routes;\r\n        this.navigate = this.navigate.bind(this);\r\n        window.addEventListener('popstate', this.navigate);\r\n        window.addEventListener('DOMContentLoaded', this.navigate);\r\n    }\r\n\r\n    navigate() {\r\n        const path = window.location.pathname;\r\n        console.log('Current path:', path);\r\n        const route = this.routes.find(route => route.path === path) || this.routes.find(route => route.path === '/');\r\n        if (route) {\r\n            console.log('Rendering route:', route.path);\r\n            route.component();\r\n        } else {\r\n            console.error('Route not found for path:', path);\r\n        }\r\n    }\r\n\r\n    push(path) {\r\n        console.log('Pushing new path:', path);\r\n        window.history.pushState(null, '', path);\r\n        this.navigate();\r\n    }\r\n}"
+        }
+    ]
+}

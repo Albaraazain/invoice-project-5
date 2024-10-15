@@ -1,0 +1,18 @@
+{
+    "sourceFile": "js/components/Toasts.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1728990493621,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1728990493621,
+            "name": "Commit-0",
+            "content": "// js/components/Toasts.js\r\nexport class Toasts {\r\n    constructor() {\r\n        this.container = document.getElementById('toasts');\r\n    }\r\n\r\n    show(message, type = 'info') {\r\n        const toast = document.createElement('div');\r\n        toast.className = `toast ${type}`;\r\n        toast.textContent = message;\r\n\r\n        this.container.appendChild(toast);\r\n\r\n        setTimeout(() => {\r\n            toast.classList.add('fade-out');\r\n            setTimeout(() => {\r\n                this.container.removeChild(toast);\r\n            }, 300);\r\n        }, 3000);\r\n    }\r\n}\r\n"
+        }
+    ]
+}

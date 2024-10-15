@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Solar System Sizing Tool</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/src/input.css" />
+    <style>
+      .fade-enter-active, .fade-leave-active {
+        transition: opacity 0.5s;
+      }
+      .fade-enter, .fade-leave-to {
+        opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" class="theme theme-light bg-[--color-bg] text-[--color-fg]">
+      <transition name="fade" mode="out-in">
+        <div id="vue-app"></div>
+        <div id="js-app"></div>
+      </transition>
+    </div>
+    <div id="toasts"></div>
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>
+</html>

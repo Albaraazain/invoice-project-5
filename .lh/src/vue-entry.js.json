@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/vue-entry.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1729001778251,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1729001778251,
+            "name": "Commit-0",
+            "content": "import { createApp } from 'vue'\r\nimport { initializeSolarSizingState } from '../js/store/solarSizingState.js'\r\n\r\n// We'll create this component in the next stage\r\nimport ReferenceInputPage from '../js/components/ReferenceInputPage.vue'\r\n\r\n// Initialize the state\r\ninitializeSolarSizingState()\r\n\r\n// Create a Vue app instance\r\nconst app = createApp(ReferenceInputPage)\r\n\r\n// Mount the app when the DOM is ready\r\ndocument.addEventListener('DOMContentLoaded', () => {\r\n  app.mount('#vue-app')\r\n})\r\n\r\n// Expose the app instance globally for potential use in other parts of the application\r\nwindow.vueApp = app"
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "sourceFile": "main.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1728989730977,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1728989930516,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n import './input.css'\n \n+\n document.querySelector('#app').innerHTML = `\n   <div class=\"container mx-auto p-4\">\n     <h1 class=\"text-3xl font-bold text-blue-600\">\n       Hello Vite + Tailwind!\n"
+                },
+                {
+                    "date": 1728990081673,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,6 @@\n-import './input.css'\n+import './input.css';\n \n-\n document.querySelector('#app').innerHTML = `\n   <div class=\"container mx-auto p-4\">\n     <h1 class=\"text-3xl font-bold text-blue-600\">\n       Hello Vite + Tailwind!\n@@ -9,5 +8,5 @@\n     <p class=\"mt-4 text-gray-600\">\n       This is a Vite project with Tailwind CSS.\n     </p>\n   </div>\n-`\n\\ No newline at end of file\n+`;\n"
+                },
+                {
+                    "date": 1728990297324,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,38 @@\n+// js/main.js\n+import { Router } from \"./router.js\";\n+import { ReferenceInputPage } from \"./components/ReferenceInputPage.js\";\n+import { QuoteResultPage } from \"./components/QuoteResultPage.js\";\n+import { initializeSolarSizingState } from \"./store/solarSizingState.js\";\n+import { Toasts } from './components/Toasts.js';\n+import '../src/input.css';\n+\n+const routes = [\n+  {\n+    path: \"/\",\n+    component: () => {\n+      console.log(\"Rendering ReferenceInputPage\");\n+      const page = new ReferenceInputPage();\n+      page.render();\n+    },\n+  },\n+  {\n+    path: \"/quote\",\n+    component: () => {\n+      console.log(\"Rendering QuoteResultPage\");\n+      const page = new QuoteResultPage();\n+      page.render();\n+    },\n+  },\n+];\n+\n+const router = new Router(routes);\n+initializeSolarSizingState();\n+\n+// Expose router to window for global access\n+window.router = router;\n+\n+// Initialize Toasts\n+window.toasts = new Toasts();\n+\n+// Start the router\n+router.navigate();\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1728989730977,
+            "name": "Commit-0",
+            "content": "import './input.css'\n\ndocument.querySelector('#app').innerHTML = `\n  <div class=\"container mx-auto p-4\">\n    <h1 class=\"text-3xl font-bold text-blue-600\">\n      Hello Vite + Tailwind!\n    </h1>\n    <p class=\"mt-4 text-gray-600\">\n      This is a Vite project with Tailwind CSS.\n    </p>\n  </div>\n`"
+        }
+    ]
+}
