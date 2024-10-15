@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 5,
+            "activePatchIndex": 8,
             "patches": [
                 {
                     "date": 1728989700830,
@@ -28,6 +28,18 @@
                 {
                     "date": 1729003034247,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,16 +8,25 @@\n       rel=\"stylesheet\"\n       href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css\"\n     />\n     <link rel=\"stylesheet\" href=\"/src/input.css\" />\n+    <style>\n+      .fade-enter-active, .fade-leave-active {\n+        transition: opacity 0.5s;\n+      }\n+      .fade-enter, .fade-leave-to {\n+        opacity: 0;\n+      }\n+    </style>\n   </head>\n   <body>\n     <div id=\"app\" class=\"theme theme-light bg-[--color-bg] text-[--color-fg]\">\n-      <!-- Vue app will be mounted here for the reference page -->\n-      <div id=\"vue-app\"></div>\n-      <!-- Router view for non-Vue pages will be inserted here -->\n-      <div id=\"js-app\"></div>\n+      <transition name=\"fade\" mode=\"out-in\">\n+        <div id=\"vue-app\"></div>\n+        <div id=\"js-app\"></div>\n+      </transition>\n     </div>\n     <div id=\"toasts\"></div>\n     <script type=\"module\" src=\"/js/main.js\"></script>\n   </body>\n+</html>\n </html>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729003496319,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,14 +19,11 @@\n     </style>\n   </head>\n   <body>\n     <div id=\"app\" class=\"theme theme-light bg-[--color-bg] text-[--color-fg]\">\n-      <transition name=\"fade\" mode=\"out-in\">\n-        <div id=\"vue-app\"></div>\n-        <div id=\"js-app\"></div>\n-      </transition>\n+      <div id=\"vue-app\"></div>\n+      <div id=\"js-app\"></div>\n     </div>\n     <div id=\"toasts\"></div>\n     <script type=\"module\" src=\"/js/main.js\"></script>\n   </body>\n-</html>\n </html>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729004813128,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,5 @@\n+// index.html\n <!DOCTYPE html>\n <html lang=\"en\">\n   <head>\n     <meta charset=\"UTF-8\" />\n@@ -8,21 +9,12 @@\n       rel=\"stylesheet\"\n       href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css\"\n     />\n     <link rel=\"stylesheet\" href=\"/src/input.css\" />\n-    <style>\n-      .fade-enter-active, .fade-leave-active {\n-        transition: opacity 0.5s;\n-      }\n-      .fade-enter, .fade-leave-to {\n-        opacity: 0;\n-      }\n-    </style>\n   </head>\n   <body>\n     <div id=\"app\" class=\"theme theme-light bg-[--color-bg] text-[--color-fg]\">\n-      <div id=\"vue-app\"></div>\n-      <div id=\"js-app\"></div>\n+      <!-- Router view will be inserted here -->\n     </div>\n     <div id=\"toasts\"></div>\n     <script type=\"module\" src=\"/js/main.js\"></script>\n   </body>\n"
+                },
+                {
+                    "date": 1729004994496,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,4 @@\n-// index.html\n <!DOCTYPE html>\n <html lang=\"en\">\n   <head>\n     <meta charset=\"UTF-8\" />\n"
                 }
             ],
             "date": 1728989700830,

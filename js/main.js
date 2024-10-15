@@ -1,15 +1,19 @@
+// js/main.js
 import { Router } from "./router.js";
+import { ReferenceInputPage } from "./components/ReferenceInputPage.js";
 import { QuoteResultPage } from "./components/QuoteResultPage.js";
-import ReferenceInputPage from "./components/ReferenceInputPage.vue";
 import { initializeSolarSizingState } from "./store/solarSizingState.js";
 import { Toasts } from './components/Toasts.js';
 import '../src/input.css';
-import { createApp } from 'vue';
 
 const routes = [
   {
     path: "/",
-    vueComponent: ReferenceInputPage
+    component: () => {
+      console.log("Rendering ReferenceInputPage");
+      const page = new ReferenceInputPage();
+      page.render();
+    },
   },
   {
     path: "/quote",
@@ -24,12 +28,8 @@ const routes = [
 const router = new Router(routes);
 initializeSolarSizingState();
 
-// Create Vue app instance
-const app = createApp({});
-
-// Expose router and Vue app to window for global access
+// Expose router to window for global access
 window.router = router;
-window.vueApp = app;
 
 // Initialize Toasts
 window.toasts = new Toasts();

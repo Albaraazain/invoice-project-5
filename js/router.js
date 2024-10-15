@@ -1,3 +1,4 @@
+// js/router.js
 export class Router {
     constructor(routes) {
         this.routes = routes;
@@ -12,32 +13,10 @@ export class Router {
         const route = this.routes.find(route => route.path === path) || this.routes.find(route => route.path === '/');
         if (route) {
             console.log('Rendering route:', route.path);
-            if (route.vueComponent) {
-                // Handle Vue component
-                this.renderVueComponent(route.vueComponent);
-            } else {
-                // Handle vanilla JS component
-                this.renderJSComponent(route.component);
-            }
+            route.component();
         } else {
             console.error('Route not found for path:', path);
         }
-    }
-
-    renderVueComponent(component) {
-        const appElement = document.getElementById('vue-app');
-        appElement.style.display = 'block';
-        document.getElementById('js-app').style.display = 'none';
-        window.vueApp.component('current-page', component);
-        window.vueApp.mount('#vue-app');
-    }
-
-    renderJSComponent(component) {
-        const jsAppElement = document.getElementById('js-app');
-        jsAppElement.style.display = 'block';
-        document.getElementById('vue-app').style.display = 'none';
-        jsAppElement.innerHTML = '';
-        component();
     }
 
     push(path) {

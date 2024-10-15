@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 1,
+            "activePatchIndex": 3,
             "patches": [
                 {
                     "date": 1729001569549,
@@ -12,6 +12,14 @@
                 {
                     "date": 1729003152747,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,11 +8,12 @@\n     \"build\": \"vite build\",\n     \"preview\": \"vite preview\"\n   },\n   \"dependencies\": {\n-    \"vue\": \"^3.2.47\"\n+    \"vue\": \"^3.5.12\"\n   },\n   \"devDependencies\": {\n+    \"@vitejs/plugin-vue\": \"^4.1.0\",\n     \"autoprefixer\": \"^10.4.20\",\n     \"postcss\": \"^8.4.47\",\n     \"tailwindcss\": \"^3.4.14\",\n     \"vite\": \"^5.4.8\"\n"
+                },
+                {
+                    "date": 1729004780856,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,5 @@\n+// package.json\n {\n   \"name\": \"invoice-project-5\",\n   \"private\": true,\n   \"version\": \"0.0.0\",\n@@ -7,15 +8,11 @@\n     \"dev\": \"vite\",\n     \"build\": \"vite build\",\n     \"preview\": \"vite preview\"\n   },\n-  \"dependencies\": {\n-    \"vue\": \"^3.5.12\"\n-  },\n   \"devDependencies\": {\n-    \"@vitejs/plugin-vue\": \"^4.1.0\",\n     \"autoprefixer\": \"^10.4.20\",\n     \"postcss\": \"^8.4.47\",\n     \"tailwindcss\": \"^3.4.14\",\n     \"vite\": \"^5.4.8\"\n   }\n-}\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729004928540,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,4 @@\n-// package.json\n {\n   \"name\": \"invoice-project-5\",\n   \"private\": true,\n   \"version\": \"0.0.0\",\n"
                 }
             ],
             "date": 1729001569549,

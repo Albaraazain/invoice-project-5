@@ -3,11 +3,15 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 1,
             "patches": [
                 {
                     "date": 1729001778251,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1729003942200,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,19 +1,19 @@\n-import { createApp } from 'vue'\r\n-import { initializeSolarSizingState } from '../js/store/solarSizingState.js'\r\n+// import { createApp } from 'vue'\r\n+// import { initializeSolarSizingState } from '../js/store/solarSizingState.js'\r\n \r\n-// We'll create this component in the next stage\r\n-import ReferenceInputPage from '../js/components/ReferenceInputPage.vue'\r\n+// // We'll create this component in the next stage\r\n+// import ReferenceInputPage from '../js/components/ReferenceInputPage.vue'\r\n \r\n-// Initialize the state\r\n-initializeSolarSizingState()\r\n+// // Initialize the state\r\n+// initializeSolarSizingState()\r\n \r\n-// Create a Vue app instance\r\n-const app = createApp(ReferenceInputPage)\r\n+// // Create a Vue app instance\r\n+// const app = createApp(ReferenceInputPage)\r\n\\ No newline at end of file\n \r\n-// Mount the app when the DOM is ready\r\n-document.addEventListener('DOMContentLoaded', () => {\r\n-  app.mount('#vue-app')\r\n-})\r\n+// // Mount the app when the DOM is ready\r\n+// document.addEventListener('DOMContentLoaded', () => {\r\n+//   app.mount('#vue-app')\r\n+// })\r\n \r\n-// Expose the app instance globally for potential use in other parts of the application\r\n-window.vueApp = app\n+// // Expose the app instance globally for potential use in other parts of the application\r\n+// window.vueApp = app\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1729001778251,
