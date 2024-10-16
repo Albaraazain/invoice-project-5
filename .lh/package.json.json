@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 3,
+            "activePatchIndex": 8,
             "patches": [
                 {
                     "date": 1729001569549,
@@ -20,6 +20,26 @@
                 {
                     "date": 1729004928540,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,4 @@\n-// package.json\n {\n   \"name\": \"invoice-project-5\",\n   \"private\": true,\n   \"version\": \"0.0.0\",\n"
+                },
+                {
+                    "date": 1729022095937,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,15 @@\n     \"dev\": \"vite\",\n     \"build\": \"vite build\",\n     \"preview\": \"vite preview\"\n   },\n+  \"dependencies\": {\n+    \"react\": \"^18.2.0\",\n+    \"react-dom\": \"^18.2.0\",\n+    \"framer-motion\": \"^10.12.16\"\n+  },\n   \"devDependencies\": {\n+    \"@vitejs/plugin-react\": \"^4.0.0\",\n     \"autoprefixer\": \"^10.4.20\",\n     \"postcss\": \"^8.4.47\",\n     \"tailwindcss\": \"^3.4.14\",\n     \"vite\": \"^5.4.8\"\n"
+                },
+                {
+                    "date": 1729022461522,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,14 +8,11 @@\n     \"build\": \"vite build\",\n     \"preview\": \"vite preview\"\n   },\n   \"dependencies\": {\n-    \"react\": \"^18.2.0\",\n-    \"react-dom\": \"^18.2.0\",\n     \"framer-motion\": \"^10.12.16\"\n   },\n   \"devDependencies\": {\n-    \"@vitejs/plugin-react\": \"^4.0.0\",\n     \"autoprefixer\": \"^10.4.20\",\n     \"postcss\": \"^8.4.47\",\n     \"tailwindcss\": \"^3.4.14\",\n     \"vite\": \"^5.4.8\"\n"
+                },
+                {
+                    "date": 1729090870986,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,13 +8,13 @@\n     \"build\": \"vite build\",\n     \"preview\": \"vite preview\"\n   },\n   \"dependencies\": {\n-    \"framer-motion\": \"^10.12.16\"\n+    \"framer-motion\": \"^11.11.9\"\n   },\n   \"devDependencies\": {\n     \"autoprefixer\": \"^10.4.20\",\n     \"postcss\": \"^8.4.47\",\n     \"tailwindcss\": \"^3.4.14\",\n     \"vite\": \"^5.4.8\"\n   }\n\\ No newline at end of file\n-}\n+}\n"
+                },
+                {
+                    "date": 1729091005765,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,5 +16,5 @@\n     \"postcss\": \"^8.4.47\",\n     \"tailwindcss\": \"^3.4.14\",\n     \"vite\": \"^5.4.8\"\n   }\n-}\n\\ No newline at end of file\n+}\n"
+                },
+                {
+                    "date": 1729099256384,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,13 +8,13 @@\n     \"build\": \"vite build\",\n     \"preview\": \"vite preview\"\n   },\n   \"dependencies\": {\n-    \"framer-motion\": \"^11.11.9\"\n+    \"gsap\": \"^3.12.2\"\n   },\n   \"devDependencies\": {\n     \"autoprefixer\": \"^10.4.20\",\n     \"postcss\": \"^8.4.47\",\n     \"tailwindcss\": \"^3.4.14\",\n     \"vite\": \"^5.4.8\"\n   }\n-}\n+}\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1729001569549,

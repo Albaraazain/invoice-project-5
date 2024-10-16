@@ -1,32 +1,33 @@
 // js/components/QuoteResultPage.js
-import { getBillData, getError } from '../store/solarSizingState.js';
-import { BillPreview } from './BillPreview.js';
-import { SystemSizing } from './SystemSizing.js';
+import { gsap } from "gsap";
+import { getBillData, getError } from "../store/solarSizingState.js";
+import { BillPreview } from "./BillPreview.js";
+import { SystemSizing } from "./SystemSizing.js";
 
 export class QuoteResultPage {
-    constructor() {
-        try {
-            this.billData = getBillData();
-            this.error = getError();
-        } catch (error) {
-            console.error('Error in QuoteResultPage constructor:', error);
-            this.error = 'Failed to load bill data. Please try again.';
-        }
+  constructor() {
+    try {
+      this.billData = getBillData();
+      this.error = getError();
+    } catch (error) {
+      console.error("Error in QuoteResultPage constructor:", error);
+      this.error = "Failed to load bill data. Please try again.";
     }
+  }
 
-    render() {
-        const app = document.getElementById('app');
-        app.innerHTML = `
+  render() {
+    const app = document.getElementById("app");
+    app.innerHTML = `
             <div class="quote-result-page">
                 <div class="animation-container">
-                    <div class="bill-preview-container centered">
+                    <div class="bill-preview-container">
                         <div id="bill-preview" class="content-fade"></div>
-                        <div class="loading-indicator">
-                            <div class="spinner"></div>
-                            <p>Analyzing your bill...</p>
-                        </div>
                     </div>
-                    <div class="system-sizing-container hidden">
+                    <div class="loading-indicator">
+                        <div class="spinner"></div>
+                        <p>Analyzing your bill...</p>
+                    </div>
+                    <div class="system-sizing-container">
                         <div id="system-sizing" class="content-fade"></div>
                     </div>
                 </div>
@@ -37,166 +38,192 @@ export class QuoteResultPage {
             </div>
         `;
 
-        if (this.error) {
-            this.showError();
-        } else {
-            this.renderBillPreview();
-            this.renderSystemSizing();
-            this.startAnimation();
-        }
-
-        this.attachStyles();
+    if (this.error) {
+      this.showError();
+    } else {
+      this.renderBillPreview();
+      this.renderSystemSizing();
+      this.startAnimation();
     }
 
-    renderBillPreview() {
-        if (!this.billData) {
-            console.error('Bill data is not available');
-            this.showError();
-            return;
-        }
-        const billPreviewContainer = document.querySelector('#bill-preview');
-        const billPreview = new BillPreview(this.billData);
-        billPreview.render(billPreviewContainer);
+    this.attachStyles();
+  }
+
+  renderBillPreview() {
+    if (!this.billData) {
+      console.error("Bill data is not available");
+      this.showError();
+      return;
+    }
+    const billPreviewContainer = document.querySelector("#bill-preview");
+    const billPreview = new BillPreview(this.billData);
+    billPreview.render(billPreviewContainer);
+  }
+
+  renderSystemSizing() {
+    if (!this.billData) {
+      console.error("Bill data is not available");
+      this.showError();
+      return;
+    }
+    const systemSizingContainer = document.querySelector("#system-sizing");
+    const systemSizing = new SystemSizing(this.billData);
+    systemSizing.render(systemSizingContainer);
+  }
+
+  startAnimation() {
+    if (this.error) {
+      this.showError();
+      return;
     }
 
-    renderSystemSizing() {
-        if (!this.billData) {
-            console.error('Bill data is not available');
-            this.showError();
-            return;
-        }
-        const systemSizingContainer = document.querySelector('#system-sizing');
-        const systemSizing = new SystemSizing(this.billData);
-        systemSizing.render(systemSizingContainer);
-    }
+    const quoteResultPage = document.querySelector(".quote-result-page");
+    const billPreviewContainer = document.querySelector(
+      ".bill-preview-container"
+    );
+    const systemSizingContainer = document.querySelector(
+      ".system-sizing-container"
+    );
+    const loadingIndicator = document.querySelector(".loading-indicator");
+    const billPreviewContent = document.querySelector("#bill-preview");
+    const systemSizingContent = document.querySelector("#system-sizing");
 
-    startAnimation() {
-        if (this.error) {
-            this.showError();
-            return;
-        }
+    // Set initial states
+    gsap.set(billPreviewContainer, {
+      scale: 0.5,
+      opacity: 0,
+      left: "50%",
+      top: "50%",
+      xPercent: -50,
+      yPercent: -50,
+    });
+    gsap.set(loadingIndicator, { opacity: 0, y: 20 });
+    gsap.set(systemSizingContainer, { opacity: 0, x: "100%" });
 
-        const quoteResultPage = document.querySelector('.quote-result-page');
-        const billPreviewContainer = document.querySelector('.bill-preview-container');
-        const systemSizingContainer = document.querySelector('.system-sizing-container');
-        const loadingIndicator = document.querySelector('.loading-indicator');
-        const billPreviewContent = document.querySelector('#bill-preview');
-        const systemSizingContent = document.querySelector('#system-sizing');
+    // Animation timeline
+    const tl = gsap.timeline();
 
-        // Use requestAnimationFrame for smoother animations
-        requestAnimationFrame(() => {
-            billPreviewContent.classList.add('fade-in');
+    // Pop up bill in the center
+    tl.to(billPreviewContainer, {
+      duration: 0.5,
+      scale: 1,
+      opacity: 1,
+      ease: "back.out(1.7)",
+    });
 
-            setTimeout(() => {
-                loadingIndicator.classList.add('fade-in');
-            }, 500);
+    // Show loading indicator
+    tl.to(
+      loadingIndicator,
+      {
+        duration: 0.3,
+        opacity: 1,
+        y: 0,
+      },
+      "+=0.5"
+    );
 
-            setTimeout(() => {
-                requestAnimationFrame(() => {
-                    quoteResultPage.classList.add('transition-bg');
-                    billPreviewContainer.classList.remove('centered');
-                    billPreviewContainer.classList.add('slide-left');
-                    loadingIndicator.classList.add('fade-out');
+    // Simulate fetching (pause)
+    tl.to({}, { duration: 2 });
 
-                    systemSizingContainer.classList.remove('hidden');
-                    systemSizingContainer.classList.add('slide-in');
+    // Hide loading indicator
+    tl.to(loadingIndicator, {
+      duration: 0.3,
+      opacity: 0,
+      y: -20,
+    });
 
-                    setTimeout(() => {
-                        systemSizingContent.classList.add('fade-in');
-                    }, 400);
-                });
-            }, 3000);
-        });
-    }
+    // Move bill to the left
+    tl.to(billPreviewContainer, {
+      duration: 0.8,
+      left: "25%",
+      top: "50%",
+      xPercent: -50,
+      yPercent: -50,
+      ease: "power2.inOut",
+    });
 
-    showError() {
-        const errorMessage = document.querySelector('.error-message');
-        errorMessage.classList.remove('hidden');
-        
-        const retryButton = document.querySelector('#retry-button');
-        retryButton.addEventListener('click', () => {
-            window.router.push('/');
-        });
-    }
+    // Show system sizing on the right
+    tl.to(
+      systemSizingContainer,
+      {
+        duration: 0.8,
+        opacity: 1,
+        x: "0%",
+        ease: "power2.inOut",
+      },
+      "-=0.6"
+    );
 
-    attachStyles() {
-        const style = document.createElement('style');
-        style.textContent = `
+    // Fade in system sizing content
+    tl.to(systemSizingContent, {
+      duration: 0.5,
+      opacity: 1,
+    });
+
+    // Change background color
+    tl.to(
+      quoteResultPage,
+      {
+        duration: 1,
+        backgroundColor: "var(--color-bg-secondary)",
+        ease: "power2.inOut",
+      },
+      "-=1"
+    );
+  }
+  showError() {
+    const errorMessage = document.querySelector(".error-message");
+    errorMessage.classList.remove("hidden");
+
+    const retryButton = document.querySelector("#retry-button");
+    retryButton.addEventListener("click", () => {
+      window.router.push("/");
+    });
+  }
+
+  attachStyles() {
+    const style = document.createElement("style");
+    style.textContent = `
             .quote-result-page {
                 height: 100vh;
                 width: 100vw;
                 overflow: hidden;
                 background-color: var(--color-bg);
                 transition: background-color 1s ease-in-out;
-            }
-
-            .transition-bg {
-                background-color: var(--color-bg-secondary);
+                position: relative;
             }
 
             .animation-container {
-                position: relative;
+                position: absolute;
                 width: 100%;
                 height: 100%;
+                top: 0;
+                left: 0;
             }
 
             .bill-preview-container,
             .system-sizing-container {
                 position: absolute;
-                top: 0;
                 width: 50%;
                 height: 100%;
-                transition: all 0.8s cubic-bezier(0.65, 0, 0.35, 1);
             }
 
             .bill-preview-container {
-                left: 0;
-                display: flex;
-                justify-content: center;
-                align-items: center;
+                z-index: 2;
             }
 
             .system-sizing-container {
-                right: -50%;
-            }
-
-            .centered {
-                left: 25% !important;
-                width: 50% !important;
-            }
-
-            .hidden {
-                opacity: 0;
-                pointer-events: none;
-            }
-
-            .slide-left {
-                left: 0 !important;
-                width: 50% !important;
-            }
-
-            .slide-in {
-                right: 0 !important;
-                opacity: 1;
-                pointer-events: auto;
+                right: 0;
+                z-index: 1;
             }
 
             .loading-indicator {
                 position: absolute;
-                top: 100%;
                 left: 50%;
-                transform: translateX(-50%);
+                top: 60%;
+                transform: translate(-50%, -50%);
                 text-align: center;
-                transition: opacity 0.5s ease-in-out;
-                opacity: 0;
-            }
-
-            .loading-indicator.fade-in {
-                opacity: 1;
-            }
-
-            .loading-indicator.fade-out {
-                opacity: 0;
+                z-index: 3;
             }
 
             .spinner {
@@ -213,13 +240,8 @@ export class QuoteResultPage {
                 to { transform: rotate(360deg); }
             }
 
-            .content-fade {
-                opacity: 0;
-                transition: opacity 0.5s ease-in-out;
-            }
-
-            .content-fade.fade-in {
-                opacity: 1;
+            .hidden {
+                display: none;
             }
 
             .error-message {
@@ -232,6 +254,7 @@ export class QuoteResultPage {
                 padding: 20px;
                 border-radius: 8px;
                 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                z-index: 4;
             }
 
             .error-message p {
@@ -253,38 +276,19 @@ export class QuoteResultPage {
                 background-color: var(--color-brand-lavender);
             }
 
-            @media (max-width: 1024px) {
+            @media (max-width: 768px) {
                 .bill-preview-container,
                 .system-sizing-container {
                     width: 100%;
                     height: 50%;
                 }
 
-                .bill-preview-container {
-                    top: 0;
-                    left: 0 !important;
-                }
-
                 .system-sizing-container {
-                    top: 100%;
-                    right: 0 !important;
-                }
-
-                .centered {
-                    top: 25% !important;
-                    height: 50% !important;
-                }
-
-                .slide-left {
-                    top: 0 !important;
-                    height: 50% !important;
-                }
-
-                .slide-in {
-                    top: 50% !important;
+                    top: 50%;
+                    right: 0;
                 }
             }
         `;
-        document.head.appendChild(style);
-    }
+    document.head.appendChild(style);
+  }
 }

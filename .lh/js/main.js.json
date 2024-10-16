@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 8,
+            "activePatchIndex": 10,
             "patches": [
                 {
                     "date": 1728990384741,
@@ -40,6 +40,14 @@
                 {
                     "date": 1729004682434,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,16 +1,20 @@\n+// js/main.js\r\n import { Router } from \"./router.js\";\r\n+import { ReferenceInputPage } from \"./components/ReferenceInputPage.js\";\r\n import { QuoteResultPage } from \"./components/QuoteResultPage.js\";\r\n-import ReferenceInputPage from \"./components/ReferenceInputPage.vue\";\r\n import { initializeSolarSizingState } from \"./store/solarSizingState.js\";\r\n import { Toasts } from './components/Toasts.js';\r\n import '../src/input.css';\r\n-import { createApp } from 'vue';\r\n \r\n const routes = [\r\n   {\r\n     path: \"/\",\r\n-    vueComponent: ReferenceInputPage\r\n+    component: () => {\r\n+      console.log(\"Rendering ReferenceInputPage\");\r\n+      const page = new ReferenceInputPage();\r\n+      page.render();\r\n+    },\r\n   },\r\n   {\r\n     path: \"/quote\",\r\n     component: () => {\r\n@@ -23,26 +27,12 @@\n \r\n const router = new Router(routes);\r\n initializeSolarSizingState();\r\n \r\n-// Create a single Vue app instance\r\n-const app = createApp({\r\n-  template: '<component :is=\"currentView\" />',\r\n-  data() {\r\n-    return {\r\n-      currentView: null\r\n-    }\r\n-  }\r\n-});\r\n-\r\n-// Mount the app\r\n-app.mount('#vue-app');\r\n-\r\n-// Expose router and Vue app to window for global access\r\n+// Expose router to window for global access\r\n window.router = router;\r\n-window.vueApp = app;\r\n \r\n // Initialize Toasts\r\n window.toasts = new Toasts();\r\n \r\n // Start the router\r\n\\ No newline at end of file\n-router.navigate();\n+router.navigate();\r\n"
+                },
+                {
+                    "date": 1729022519581,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,4 @@\n-// js/main.js\r\n import { Router } from \"./router.js\";\r\n import { ReferenceInputPage } from \"./components/ReferenceInputPage.js\";\r\n import { QuoteResultPage } from \"./components/QuoteResultPage.js\";\r\n import { initializeSolarSizingState } from \"./store/solarSizingState.js\";\r\n"
+                },
+                {
+                    "date": 1729099348966,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,5 @@\n+import { gsap } from \"gsap\";\r\n import { Router } from \"./router.js\";\r\n import { ReferenceInputPage } from \"./components/ReferenceInputPage.js\";\r\n import { QuoteResultPage } from \"./components/QuoteResultPage.js\";\r\n import { initializeSolarSizingState } from \"./store/solarSizingState.js\";\r\n"
                 }
             ],
             "date": 1728990384741,

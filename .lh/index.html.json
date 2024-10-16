@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 8,
+            "activePatchIndex": 9,
             "patches": [
                 {
                     "date": 1728989700830,
@@ -40,6 +40,10 @@
                 {
                     "date": 1729004994496,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,4 @@\n-// index.html\n <!DOCTYPE html>\n <html lang=\"en\">\n   <head>\n     <meta charset=\"UTF-8\" />\n"
+                },
+                {
+                    "date": 1729099362013,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,9 @@\n       rel=\"stylesheet\"\n       href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css\"\n     />\n     <link rel=\"stylesheet\" href=\"/src/input.css\" />\n+    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js\"></script>\n   </head>\n   <body>\n     <div id=\"app\" class=\"theme theme-light bg-[--color-bg] text-[--color-fg]\">\n       <!-- Router view will be inserted here -->\n"
                 }
             ],
             "date": 1728989700830,

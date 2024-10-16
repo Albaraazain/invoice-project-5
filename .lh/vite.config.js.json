@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 4,
+            "activePatchIndex": 6,
             "patches": [
                 {
                     "date": 1728989956351,
@@ -24,6 +24,14 @@
                 {
                     "date": 1729004976937,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,15 +1,8 @@\n import { defineConfig } from 'vite'\r\n-import vue from '@vitejs/plugin-vue'\r\n \r\n+\r\n export default defineConfig({\r\n-  plugins: [vue()],\r\n   build: {\r\n     cssMinify: 'lightningcss',\r\n   },\r\n-  resolve: {\r\n-    alias: {\r\n-      '@': '/js',\r\n-      'vue': 'vue/dist/vue.esm-bundler.js'\r\n-    },\r\n-  },\r\n })\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729022239163,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n import { defineConfig } from 'vite'\r\n+import react from '@vitejs/plugin-react'\r\n \r\n-\r\n export default defineConfig({\r\n+  plugins: [react()],\r\n   build: {\r\n     cssMinify: 'lightningcss',\r\n   },\r\n })\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729022643330,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,8 @@\n import { defineConfig } from 'vite'\r\n-import react from '@vitejs/plugin-react'\r\n \r\n+\r\n export default defineConfig({\r\n-  plugins: [react()],\r\n   build: {\r\n     cssMinify: 'lightningcss',\r\n   },\r\n })\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1728989956351,
