@@ -1,8 +1,8 @@
-// js/components/QuoteResultPage.js
 import { gsap } from "gsap";
 import { getBillData, getError } from "../store/solarSizingState.js";
 import { BillPreview } from "./BillPreview.js";
 import { SystemSizing } from "./SystemSizing.js";
+import { CountUp } from "countup.js";
 
 export class QuoteResultPage {
   constructor() {
@@ -13,40 +13,40 @@ export class QuoteResultPage {
       console.error("Error in QuoteResultPage constructor:", error);
       this.error = "Failed to load bill data. Please try again.";
     }
+    this.systemSizing = null;
   }
 
-  render() {
+  async render() {
     const app = document.getElementById("app");
     app.innerHTML = `
-            <div class="quote-result-page">
-                <div class="animation-container">
-                    <div class="bill-preview-container">
-                        <div id="bill-preview" class="content-fade"></div>
-                    </div>
-                    <div class="loading-indicator">
-                        <div class="spinner"></div>
-                        <p>Analyzing your bill...</p>
-                    </div>
-                    <div class="system-sizing-container">
-                        <div id="system-sizing" class="content-fade"></div>
-                    </div>
-                </div>
-                <div class="error-message hidden">
-                    <p>An error occurred. Please try again.</p>
-                    <button id="retry-button">Retry</button>
-                </div>
-            </div>
-        `;
+      <div class="quote-result-page">
+        <div class="animation-container">
+          <div class="bill-preview-container">
+            <div id="bill-preview"></div>
+          </div>
+          <div class="loading-indicator">
+            <div class="spinner"></div>
+            <p>Analyzing your bill...</p>
+          </div>
+          <div class="system-sizing-container">
+            <div id="system-sizing"></div>
+          </div>
+        </div>
+        <div class="error-message hidden">
+          <p>An error occurred. Please try again.</p>
+          <button id="retry-button">Retry</button>
+        </div>
+      </div>
+    `;
+
+    this.attachStyles();
 
     if (this.error) {
       this.showError();
     } else {
       this.renderBillPreview();
-      this.renderSystemSizing();
-      this.startAnimation();
+      await this.startAnimation();
     }
-
-    this.attachStyles();
   }
 
   renderBillPreview() {
@@ -60,6 +60,7 @@ export class QuoteResultPage {
     billPreview.render(billPreviewContainer);
   }
 
+
   renderSystemSizing() {
     if (!this.billData) {
       console.error("Bill data is not available");
@@ -67,11 +68,15 @@ export class QuoteResultPage {
       return;
     }
     const systemSizingContainer = document.querySelector("#system-sizing");
-    const systemSizing = new SystemSizing(this.billData);
-    systemSizing.render(systemSizingContainer);
+    if (this.systemSizing) {
+      this.systemSizing.cleanup();
+    }
+    this.systemSizing = new SystemSizing(this.billData);
+    this.systemSizing.render(systemSizingContainer);
   }
 
-  startAnimation() {
+
+  async startAnimation() {
     if (this.error) {
       this.showError();
       return;
@@ -85,92 +90,48 @@ export class QuoteResultPage {
       ".system-sizing-container"
     );
     const loadingIndicator = document.querySelector(".loading-indicator");
-    const billPreviewContent = document.querySelector("#bill-preview");
-    const systemSizingContent = document.querySelector("#system-sizing");
 
-    // Set initial states
     gsap.set(billPreviewContainer, {
-      scale: 0.5,
       opacity: 0,
+      scale: 0.9,
       left: "50%",
-      top: "50%",
       xPercent: -50,
-      yPercent: -50,
+      width: "47.5%",
     });
-    gsap.set(loadingIndicator, { opacity: 0, y: 20 });
-    gsap.set(systemSizingContainer, { opacity: 0, x: "100%" });
+    gsap.set(systemSizingContainer, { opacity: 0, xPercent: 100 });
+    gsap.set(loadingIndicator, { opacity: 0, scale: 0.5 });
 
-    // Animation timeline
-    const tl = gsap.timeline();
-
-    // Pop up bill in the center
-    tl.to(billPreviewContainer, {
-      duration: 0.5,
-      scale: 1,
-      opacity: 1,
-      ease: "back.out(1.7)",
+    const tl = gsap.timeline({
+      defaults: { duration: 0.8, ease: "power2.out" },
     });
 
-    // Show loading indicator
-    tl.to(
-      loadingIndicator,
-      {
-        duration: 0.3,
-        opacity: 1,
-        y: 0,
-      },
-      "+=0.5"
-    );
+    await tl
+      .to(billPreviewContainer, { opacity: 1, scale: 1, duration: 1 })
+      .to(loadingIndicator, { opacity: 1, scale: 1, duration: 0.5 })
+      .to(loadingIndicator, { opacity: 0, scale: 0.5, delay: 1 })
+      .to(
+        billPreviewContainer,
+        {
+          left: "0%",
+          xPercent: 0,
+          width: "50%",
+        },
+        "-=0.3"
+      )
+      .to(systemSizingContainer, { opacity: 1, xPercent: 0 }, "-=0.5")
+      .to(
+        quoteResultPage,
+        { backgroundColor: "var(--color-bg-secondary)", duration: 1 },
+        "-=0.5"
+      );
 
-    // Simulate fetching (pause)
-    tl.to({}, { duration: 2 });
+    this.renderSystemSizing();
 
-    // Hide loading indicator
-    tl.to(loadingIndicator, {
-      duration: 0.3,
-      opacity: 0,
-      y: -20,
-    });
-
-    // Move bill to the left
-    tl.to(billPreviewContainer, {
-      duration: 0.8,
-      left: "25%",
-      top: "50%",
-      xPercent: -50,
-      yPercent: -50,
-      ease: "power2.inOut",
-    });
-
-    // Show system sizing on the right
-    tl.to(
-      systemSizingContainer,
-      {
-        duration: 0.8,
-        opacity: 1,
-        x: "0%",
-        ease: "power2.inOut",
-      },
-      "-=0.6"
-    );
-
-    // Fade in system sizing content
-    tl.to(systemSizingContent, {
-      duration: 0.5,
-      opacity: 1,
-    });
-
-    // Change background color
-    tl.to(
-      quoteResultPage,
-      {
-        duration: 1,
-        backgroundColor: "var(--color-bg-secondary)",
-        ease: "power2.inOut",
-      },
-      "-=1"
-    );
+    if (this.systemSizing) {
+      await this.systemSizing.animateAll();
+    }
   }
+
   showError() {
     const errorMessage = document.querySelector(".error-message");
     errorMessage.classList.remove("hidden");
@@ -179,6 +140,12 @@ export class QuoteResultPage {
     retryButton.addEventListener("click", () => {
       window.router.push("/");
     });
+
+    gsap.fromTo(
+      errorMessage,
+      { x: -10 },
+      { x: 10, duration: 0.1, repeat: 5, yoyo: true }
+    );
   }
 
   attachStyles() {
@@ -187,43 +154,58 @@ export class QuoteResultPage {
             .quote-result-page {
                 height: 100vh;
                 width: 100vw;
-                overflow: hidden;
                 background-color: var(--color-bg);
-                transition: background-color 1s ease-in-out;
-                position: relative;
+                transition: background-color 1s ease;
+                overflow: hidden;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
 
             .animation-container {
-                position: absolute;
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 width: 100%;
                 height: 100%;
-                top: 0;
-                left: 0;
+                position: relative;
             }
 
             .bill-preview-container,
             .system-sizing-container {
                 position: absolute;
-                width: 50%;
                 height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
 
             .bill-preview-container {
-                z-index: 2;
+                left: 0;
+                width: 50%;
             }
 
             .system-sizing-container {
                 right: 0;
-                z-index: 1;
+                width: 50%;
+            }
+
+            #bill-preview,
+            #system-sizing {
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                padding: 1rem;
+                box-sizing: border-box;
             }
 
             .loading-indicator {
                 position: absolute;
                 left: 50%;
-                top: 60%;
+                top: 50%;
                 transform: translate(-50%, -50%);
                 text-align: center;
-                z-index: 3;
+                z-index: 10;
             }
 
             .spinner {
@@ -240,21 +222,17 @@ export class QuoteResultPage {
                 to { transform: rotate(360deg); }
             }
 
-            .hidden {
-                display: none;
-            }
-
             .error-message {
-                position: absolute;
+                position: fixed;
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                text-align: center;
                 background-color: var(--color-bg);
                 padding: 20px;
                 border-radius: 8px;
                 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                z-index: 4;
+                z-index: 20;
+                text-align: center;
             }
 
             .error-message p {
@@ -276,16 +254,27 @@ export class QuoteResultPage {
                 background-color: var(--color-brand-lavender);
             }
 
+            .hidden {
+                display: none;
+            }
+
             @media (max-width: 768px) {
+                .animation-container {
+                    flex-direction: column;
+                }
+
                 .bill-preview-container,
                 .system-sizing-container {
                     width: 100%;
                     height: 50%;
                 }
 
+                .bill-preview-container {
+                    top: 0;
+                }
+
                 .system-sizing-container {
-                    top: 50%;
-                    right: 0;
+                    bottom: 0;
                 }
             }
         `;
