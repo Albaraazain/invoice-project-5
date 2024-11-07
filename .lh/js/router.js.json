@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 6,
+            "activePatchIndex": 7,
             "patches": [
                 {
                     "date": 1728990409906,
@@ -32,6 +32,10 @@
                 {
                     "date": 1729021899237,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,27 @@\n+// js/router.js\r\n+export class Router {\r\n+    constructor(routes) {\r\n+        this.routes = routes;\r\n+        this.navigate = this.navigate.bind(this);\r\n+        window.addEventListener('popstate', this.navigate);\r\n+        window.addEventListener('DOMContentLoaded', this.navigate);\r\n+    }\r\n+\r\n+    navigate() {\r\n+        const path = window.location.pathname;\r\n+        console.log('Current path:', path);\r\n+        const route = this.routes.find(route => route.path === path) || this.routes.find(route => route.path === '/');\r\n+        if (route) {\r\n+            console.log('Rendering route:', route.path);\r\n+            route.component();\r\n+        } else {\r\n+            console.error('Route not found for path:', path);\r\n+        }\r\n+    }\r\n+\r\n+    push(path) {\r\n+        console.log('Pushing new path:', path);\r\n+        window.history.pushState(null, '', path);\r\n+        this.navigate();\r\n+    }\r\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1731018878909,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,32 +23,5 @@\n         console.log('Pushing new path:', path);\r\n         window.history.pushState(null, '', path);\r\n         this.navigate();\r\n     }\r\n-}\n-// js/router.js\r\n-export class Router {\r\n-    constructor(routes) {\r\n-        this.routes = routes;\r\n-        this.navigate = this.navigate.bind(this);\r\n-        window.addEventListener('popstate', this.navigate);\r\n-        window.addEventListener('DOMContentLoaded', this.navigate);\r\n-    }\r\n-\r\n-    navigate() {\r\n-        const path = window.location.pathname;\r\n-        console.log('Current path:', path);\r\n-        const route = this.routes.find(route => route.path === path) || this.routes.find(route => route.path === '/');\r\n-        if (route) {\r\n-            console.log('Rendering route:', route.path);\r\n-            route.component();\r\n-        } else {\r\n-            console.error('Route not found for path:', path);\r\n-        }\r\n-    }\r\n-\r\n-    push(path) {\r\n-        console.log('Pushing new path:', path);\r\n-        window.history.pushState(null, '', path);\r\n-        this.navigate();\r\n-    }\r\n }\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1728990409906,

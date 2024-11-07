@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 13,
+            "activePatchIndex": 14,
             "patches": [
                 {
                     "date": 1728989700830,
@@ -60,6 +60,10 @@
                 {
                     "date": 1731017479450,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,8 @@\n     <link\n       rel=\"stylesheet\"\n       href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css\"\n     />\n-    <link rel=\"stylesheet\" href=\"styles.css\">\n \n     <link rel=\"stylesheet\" href=\"/src/input.css\" />\n     <script src=\"https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js\"></script>\n     <!-- <script src=\"https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js\"></script> -->\n"
+                },
+                {
+                    "date": 1731018893980,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,7 +18,7 @@\n     <div id=\"app\" class=\"theme theme-light bg-[--color-bg] text-[--color-fg]\">\n       <!-- Router view will be inserted here -->\n     </div>\n     <div id=\"toasts\"></div>\n-    <script type=\"module\" src=\"/js/main.js\"></script>\n+    <script type=\"module\" src=\"/src/js/main.js\"></script>\n   </body>\n </html>\n"
                 }
             ],
             "date": 1728989700830,
