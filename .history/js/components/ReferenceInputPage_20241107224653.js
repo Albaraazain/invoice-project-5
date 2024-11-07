@@ -1,5 +1,6 @@
 // ReferenceInputPage.js
-import { fetchBillData } from "../store/solarSizingState.js";
+import { fetchBillData } from '../store/solarSizingState.js';
+
 
 export class ReferenceInputPage {
   constructor() {
@@ -321,8 +322,14 @@ export class ReferenceInputPage {
 
   getLogoTemplate() {
     return `
-        <img src="/assets/logo.svg" alt="Logo" class="logo-icon -ml-8 -mt-8" style="width: 13rem; height: 13rem;" />
-        
+        <svg class="logo-icon" viewBox="0 0 60 50">
+            <path d="M30,20 C25,10 35,0 45,10 L55,20 C65,30 55,40 45,30 Z" 
+                fill="var(--color-primary)"/>
+        </svg>
+        <div class="logo-text">
+            <h1>ENERGY COVE</h1>
+            <p>Energy for Life</p>
+        </div>
     `;
   }
 
@@ -429,7 +436,20 @@ export class ReferenceInputPage {
 
   getWaveTemplate() {
     return `
-        
+        <div class="absolute bottom-0 w-full">
+            <svg class="wave-animation" viewBox="0 0 1200 100" preserveAspectRatio="none">
+                <path 
+                    d="M0,20 C200,0 400,40 600,20 S800,0 1200,20 L1200,100 L0,100 Z"
+                    fill="var(--color-primary)"
+                    opacity="0.3"
+                />
+                <path 
+                    d="M0,40 C200,20 400,60 600,40 S800,20 1200,40 L1200,100 L0,100 Z"
+                    fill="var(--color-yellow)"
+                    opacity="0.5"
+                />
+            </svg>
+        </div>
     `;
   }
 
@@ -515,30 +535,29 @@ export class ReferenceInputPage {
     const { id, value } = field;
     let isValid = true;
     let errorMessage = "";
-
+  
     switch (id) {
       case "provider":
         isValid = value.trim().length >= 2;
         errorMessage = "Provider name must be at least 2 characters";
         break;
-
+  
       case "referenceNumber":
         isValid = /^[A-Za-z0-9-]{4,}$/.test(value.trim());
         errorMessage = "Please enter a valid reference number";
         break;
-
+  
       case "whatsapp":
         isValid = /^\+92\s?3\d{2}[-\s]?\d{7}$/.test(value.trim());
-        errorMessage =
-          "Please enter a valid Pakistani phone number (e.g., +92 3XX XXXXXXX)";
+        errorMessage = "Please enter a valid Pakistani phone number (e.g., +92 3XX XXXXXXX)";
         break;
     }
-
+  
     // Update field styling
     if (value) {
       field.classList.toggle("invalid", !isValid);
       field.classList.toggle("valid", isValid);
-
+  
       // Show/hide error message
       const errorElement = field.parentElement.querySelector(".field-error");
       if (!isValid) {
@@ -552,29 +571,26 @@ export class ReferenceInputPage {
         errorElement.remove();
       }
     }
-
+  
     return isValid;
   }
+  
 
   formatPhoneNumber(event) {
     let input = event.target;
     let value = input.value.replace(/[^\d+]/g, ""); // Keep digits and the plus sign only
-
+  
     // Format as +92 3XX XXXXXXX
     if (value.startsWith("+92")) {
       if (value.length > 3) {
-        value =
-          value.slice(0, 3) +
-          " " +
-          value.slice(3, 6) +
-          " " +
-          value.slice(6, 13);
+        value = value.slice(0, 3) + " " + value.slice(3, 6) + " " + value.slice(6, 13);
       }
     }
-
+  
     input.value = value;
     this.state.whatsapp = value;
   }
+  
 
   async handleSubmit(event) {
     event.preventDefault();
@@ -605,8 +621,8 @@ export class ReferenceInputPage {
       // Show processing animation
       this.showProcessingAnimation();
 
-      // Call the imported fetchBillData function
-      await fetchBillData(this.state.referenceNumber);
+      // Attempt to fetch bill data
+      await this.fetchBillData();
 
       // Navigate to quote page on success
       window.router.push("/quote");
@@ -619,6 +635,14 @@ export class ReferenceInputPage {
     }
   }
 
+  async fetchBillData() {
+    try {
+      // Call the fetchBillData function from your store
+      await window.fetchBillData(this.state.referenceNumber);
+    } catch (error) {
+      throw new Error("Failed to fetch bill data");
+    }
+  }
 
   setState(newState) {
     this.state = { ...this.state, ...newState };

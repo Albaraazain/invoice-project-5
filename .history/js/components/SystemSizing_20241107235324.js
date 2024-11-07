@@ -194,8 +194,6 @@ export class SystemSizing {
     });
   }
 
-
-
   generateMonthlyData() {
     const months = [
       "January", "February", "March", "April",
@@ -208,32 +206,6 @@ export class SystemSizing {
       production: this.generateProductionValue(month),
       consumption: this.generateConsumptionValue(month)
     }));
-  }
-
-  generateProductionValue(month) {
-    // Simulate seasonal variations
-    const seasonalFactors = {
-      "December": 0.6, "January": 0.6, "February": 0.7,
-      "March": 0.8, "April": 0.9, "May": 1,
-      "June": 1, "July": 1, "August": 0.9,
-      "September": 0.8, "October": 0.7, "November": 0.6
-    };
-    
-    const baseValue = 800;
-    return Math.round(baseValue * seasonalFactors[month] * (0.9 + Math.random() * 0.2));
-  }
-
-  generateConsumptionValue(month) {
-    // Simulate higher consumption in summer/winter
-    const seasonalFactors = {
-      "December": 1.2, "January": 1.2, "February": 1.1,
-      "March": 0.9, "April": 0.8, "May": 1,
-      "June": 1.2, "July": 1.3, "August": 1.2,
-      "September": 1, "October": 0.9, "November": 1
-    };
-    
-    const baseValue = 700;
-    return Math.round(baseValue * seasonalFactors[month] * (0.9 + Math.random() * 0.2));
   }
 
   getBaseChartOptions() {
@@ -306,19 +278,15 @@ export class SystemSizing {
       x: {
         type: 'number',
         easing: 'easeOutElastic',
-        duration: (ctx) => {
-          const delayBetween = ctx?.index || 0; // Safely access index
-          return 1000 + delayBetween * 100;
-        },
+        duration: delayBetween => 1000 + delayBetween * 100,
         from: (ctx) => {
           if (ctx.type === 'data') {
             return ctx.chart.scales.x.getPixelForValue(ctx.index - 1);
           }
           return ctx.chart.scales.x.getPixelForValue(ctx.index);
         },
-        delay: (ctx) => (ctx?.index || 0) * 100 // Safely access index
+        delay: (ctx) => ctx.index * 100
       },
-      
       y: {
         type: 'number',
         easing: 'easeOutBounce',
@@ -480,23 +448,29 @@ export class SystemSizing {
         to: 0.4
       },
       delay: (ctx) => {
-        const delay = ctx.dataIndex ? ctx.dataIndex : 0; // Safeguard against undefined
-        return delay * 100;
+        const delay = ctx.dataIndex * 100;
+        const datasetIndex = ctx.datasetIndex;
+        return delay + datasetIndex * 500;
       },
       x: {
         type: 'number',
         easing: 'easeOutQuart',
-        duration: 1500, // Use a fixed number if dynamic calculation isn't needed
+        duration: delayBetween => 1000 + delayBetween * 50,
+        from: (ctx) => {
+          if (ctx.type !== 'data') return 0;
+          const scale = ctx.chart.scales.x;
+          return scale.getPixelForValue(scale.min);
+        }
       },
       y: {
         type: 'number',
         easing: 'easeOutQuart',
-        duration: 1500,
+        duration: 2000,
         from: (ctx) => {
           if (ctx.type !== 'data') return 0;
           return ctx.chart.scales.y.getPixelForValue(0);
         },
-        delay: (ctx) => ctx.dataIndex * 100,
+        delay: (ctx) => ctx.dataIndex * 100
       }
     };
 
@@ -595,94 +569,6 @@ export class SystemSizing {
     return icons[name] || '';
   }
 
-  initCountUps() {
-    const countUpOptions = {
-      duration: 2,
-      useEasing: true,
-      useGrouping: true,
-    };
-
-    this.countUps = {
-      systemSize: new CountUp("system-size-value", this.billData.recommendedSystemSize, {
-        ...countUpOptions,
-        decimalPlaces: 2,
-      }),
-      
-      estimatedCost: new CountUp("estimated-cost-value", this.billData.estimatedSystemCost, {
-        ...countUpOptions,
-        separator: ',',
-      }),
-
-      paybackPeriod: new CountUp("payback-period-value", this.billData.estimatedPaybackPeriod, {
-        ...countUpOptions,
-        decimalPlaces: 1,
-      }),
-
-      annualSavings: new CountUp("annual-savings-value", this.billData.estimatedAnnualSavings, {
-        ...countUpOptions,
-        separator: ',',
-      }),
-
-      dailyProduction: new CountUp("daily-production-value", this.billData.estimatedDailyProduction, {
-        ...countUpOptions,
-        decimalPlaces: 1,
-      }),
-
-      monthlyProduction: new CountUp("monthly-production-value", this.billData.estimatedMonthlyProduction, {
-        ...countUpOptions,
-      }),
-
-      annualProduction: new CountUp("annual-production-value", this.billData.estimatedAnnualProduction, {
-        ...countUpOptions,
-      }),
-
-      coveragePercentage: new CountUp("coverage-percentage-value", this.billData.coveragePercentage, {
-        ...countUpOptions,
-        decimalPlaces: 1,
-      }),
-
-      numberOfPanels: new CountUp("number-of-panels-value", this.billData.numberOfPanels, {
-        ...countUpOptions,
-        decimalPlaces: 0,
-      }),
-
-      panelWattage: new CountUp("panel-wattage-value", this.billData.panelWattage, {
-        ...countUpOptions,
-        decimalPlaces: 0,
-      }),
-
-      co2Offset: new CountUp("co2-offset-value", this.calculateCO2Offset(), {
-        ...countUpOptions,
-        decimalPlaces: 2,
-      }),
-
-      roofArea: new CountUp("roof-area-value", this.calculateRoofArea(), {
-        ...countUpOptions,
-        decimalPlaces: 0,
-      })
-    };
-  }
-
-  startCountUps() {
-    Object.values(this.countUps).forEach(countUp => {
-      if (countUp && !countUp.error) {
-        countUp.start();
-      }
-    });
-  }
-
-  calculateCO2Offset() {
-    const annualProduction = this.billData.estimatedAnnualProduction;
-    const co2PerKWh = 0.0007; // tons of CO2 per kWh (average US grid)
-    return (annualProduction * co2PerKWh);
-  }
-
-  calculateRoofArea() {
-    const panelArea = 17.5; // average area of a single solar panel in sq ft
-    return this.billData.numberOfPanels * panelArea;
-  }
-
-
   startAnimations() {
     // Initialize GSAP timeline for card animations
     const cards = document.querySelectorAll('#system-sizing > div');
@@ -755,31 +641,6 @@ export class SystemSizing {
     const stateTaxCredit = this.billData.estimatedSystemCost * 0.1;
     return (federalTaxCredit + stateTaxCredit).toFixed(0);
   }
-   // Helper methods
-   prepareCostBreakdownData() {
-    const equipmentCost = this.billData.estimatedSystemCost * 0.6;
-    const laborCost = this.billData.estimatedSystemCost * 0.3;
-    const permitsCost = this.billData.estimatedSystemCost * 0.1;
-
-    return {
-      labels: ["Equipment", "Labor", "Permits & Misc"],
-      values: [equipmentCost, laborCost, permitsCost]
-    };
-  }
-
-  preparePaybackData() {
-    const paybackYears = Math.ceil(this.billData.estimatedPaybackPeriod);
-    const labels = Array.from({ length: paybackYears + 1 }, (_, i) => i);
-    const savings = Array.from(
-      { length: paybackYears + 1 },
-      (_, i) => i * this.billData.estimatedAnnualSavings
-    );
-    const cost = Array(paybackYears + 1).fill(this.billData.estimatedSystemCost);
-
-    return { labels, savings, cost };
-  }
-
-  
 
   debounce(func, wait) {
     let timeout;

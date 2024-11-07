@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1000 1000">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #5ea244;
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient-2);
+      }
+
+      .cls-3 {
+        fill: none;
+      }
+
+      .cls-4 {
+        fill: #434343;
+        font-size: 24px;
+        letter-spacing: .1em;
+      }
+
+      .cls-4, .cls-5 {
+        font-family: Montserrat-Bold, Montserrat;
+        font-weight: 700;
+      }
+
+      .cls-6 {
+        fill: #383838;
+      }
+
+      .cls-5 {
+        font-size: 103.8px;
+      }
+
+      .cls-7 {
+        fill: url(#linear-gradient);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="249.1" y1="447.8" x2="549.1" y2="447.8" gradientTransform="translate(696.6 947.8) rotate(-180)" gradientUnits="userSpaceOnUse">
+      <stop offset=".4" stop-color="#6abd45"/>
+      <stop offset="1" stop-color="#1b5e2f"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="76.2" y1="347.8" x2="250" y2="536.9" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#3f843f"/>
+      <stop offset=".5" stop-color="#6bbe45"/>
+    </linearGradient>
+  </defs>
+  <!-- Generator: Adobe Illustrator 28.7.2, SVG Export Plug-In . SVG Version: 1.2.0 Build 154)  -->
+  <g>
+    <g id="Layer_1">
+      <g>
+        <g>
+          <text class="cls-5" transform="translate(421.1 473.4)"><tspan class="cls-1"><tspan x="0" y="0">RADIANT</tspan></tspan><tspan class="cls-6"><tspan x="0" y="97.7">ENERGY</tspan></tspan></text>
+          <text class="cls-4" transform="translate(421.2 607.8)"><tspan x="0" y="0">FOR A BETTER TOMORROW</tspan></text>
+        </g>
+        <g>
+          <path class="cls-7" d="M250.8,665.2l122.3-70.6c8.6-5,13.9-14.1,13.9-24v-141.2c0-9.9-5.3-19-13.9-24l-122.3-70.6c-8.6-5-19.1-5-27.7,0l-122.3,70.6c-8.6,5-13.9,14.1-13.9,24v141.2c0,9.9,5.3,19,13.9,24l122.3,70.6c8.6,5,19.1,5,27.7,0ZM255.2,363.6v114.6h62.5l-98.9,158.2v-114.6h-62.5l98.9-158.2Z"/>
+          <path class="cls-2" d="M218.7,636.4v-114.6h-62.5,0s0,0,0,0c41.4-66.3,95.1-152.2,99-158.2,8.4-13,19.5-15.1,33-7.3l-37.4-21.6c-8.6-4.9-19.1-4.9-27.7,0l-122.3,70.6c-8.6,5-13.9,14.1-13.9,24v141.2c0,9.9,5.3,19,13.9,24l122.3,70.6c4.3,2.5,9.1,3.7,13.9,3.7,0,0-18.2-6.2-18.2-32.6Z"/>
+        </g>
+      </g>
+      <rect class="cls-3" width="1000" height="1000"/>
+    </g>
+  </g>
+</svg>

@@ -194,8 +194,6 @@ export class SystemSizing {
     });
   }
 
-
-
   generateMonthlyData() {
     const months = [
       "January", "February", "March", "April",
@@ -500,6 +498,123 @@ export class SystemSizing {
       }
     };
 
+    initCountUps() {
+    const options = {
+      duration: 2,
+      useEasing: true,
+      useGrouping: true,
+    };
+
+    this.countUps = {
+      systemSize: new CountUp(
+        "system-size-value",
+        this.billData.recommendedSystemSize,
+        {
+          ...options,
+          decimalPlaces: 2,
+        }
+      ),
+      estimatedCost: new CountUp(
+        "estimated-cost-value",
+        this.billData.estimatedSystemCost,
+        {
+          ...options,
+          prefix: "$",
+        }
+      ),
+      paybackPeriod: new CountUp(
+        "payback-period-value",
+        this.billData.estimatedPaybackPeriod,
+        {
+          ...options,
+          decimalPlaces: 1,
+        }
+      ),
+      annualSavings: new CountUp(
+        "annual-savings-value",
+        this.billData.estimatedAnnualSavings,
+        {
+          ...options,
+          prefix: "$",
+        }
+      ),
+      dailyProduction: new CountUp(
+        "daily-production-value",
+        this.billData.estimatedDailyProduction,
+        {
+          ...options,
+          decimalPlaces: 1,
+        }
+      ),
+      monthlyProduction: new CountUp(
+        "monthly-production-value",
+        this.billData.estimatedMonthlyProduction,
+        {
+          ...options,
+          decimalPlaces: 0,
+        }
+      ),
+      annualProduction: new CountUp(
+        "annual-production-value",
+        this.billData.estimatedAnnualProduction,
+        {
+          ...options,
+          decimalPlaces: 0,
+        }
+      ),
+      coveragePercentage: new CountUp(
+        "coverage-percentage-value",
+        this.billData.coveragePercentage,
+        {
+          ...options,
+          decimalPlaces: 1,
+          suffix: "%",
+        }
+      ),
+      numberOfPanels: new CountUp(
+        "number-of-panels-value",
+        this.billData.numberOfPanels,
+        {
+          ...options,
+          decimalPlaces: 0,
+        }
+      ),
+      panelWattage: new CountUp(
+        "panel-wattage-value",
+        this.billData.panelWattage,
+        {
+          ...options,
+          decimalPlaces: 0,
+        }
+      ),
+      annualSavingsDetail: new CountUp(
+        "annual-savings-detail-value",
+        this.billData.estimatedAnnualSavings,
+        {
+          ...options,
+          prefix: "$",
+        }
+      ),
+      co2Offset: new CountUp("co2-offset-value", this.calculateCO2Offset(), {
+        ...options,
+        decimalPlaces: 2,
+      }),
+      roofArea: new CountUp("roof-area-value", this.calculateRoofArea(), {
+        ...options,
+        decimalPlaces: 0,
+      }),
+    };
+  }
+
+  startCountUps() {
+    Object.values(this.countUps).forEach((countUp) => {
+      if (countUp && !countUp.error) {
+        countUp.start();
+      }
+    });
+  }
+    
+
     this.charts.paybackPeriod = new Chart(ctx, {
       type: "line",
       data: {
@@ -594,94 +709,6 @@ export class SystemSizing {
     };
     return icons[name] || '';
   }
-
-  initCountUps() {
-    const countUpOptions = {
-      duration: 2,
-      useEasing: true,
-      useGrouping: true,
-    };
-
-    this.countUps = {
-      systemSize: new CountUp("system-size-value", this.billData.recommendedSystemSize, {
-        ...countUpOptions,
-        decimalPlaces: 2,
-      }),
-      
-      estimatedCost: new CountUp("estimated-cost-value", this.billData.estimatedSystemCost, {
-        ...countUpOptions,
-        separator: ',',
-      }),
-
-      paybackPeriod: new CountUp("payback-period-value", this.billData.estimatedPaybackPeriod, {
-        ...countUpOptions,
-        decimalPlaces: 1,
-      }),
-
-      annualSavings: new CountUp("annual-savings-value", this.billData.estimatedAnnualSavings, {
-        ...countUpOptions,
-        separator: ',',
-      }),
-
-      dailyProduction: new CountUp("daily-production-value", this.billData.estimatedDailyProduction, {
-        ...countUpOptions,
-        decimalPlaces: 1,
-      }),
-
-      monthlyProduction: new CountUp("monthly-production-value", this.billData.estimatedMonthlyProduction, {
-        ...countUpOptions,
-      }),
-
-      annualProduction: new CountUp("annual-production-value", this.billData.estimatedAnnualProduction, {
-        ...countUpOptions,
-      }),
-
-      coveragePercentage: new CountUp("coverage-percentage-value", this.billData.coveragePercentage, {
-        ...countUpOptions,
-        decimalPlaces: 1,
-      }),
-
-      numberOfPanels: new CountUp("number-of-panels-value", this.billData.numberOfPanels, {
-        ...countUpOptions,
-        decimalPlaces: 0,
-      }),
-
-      panelWattage: new CountUp("panel-wattage-value", this.billData.panelWattage, {
-        ...countUpOptions,
-        decimalPlaces: 0,
-      }),
-
-      co2Offset: new CountUp("co2-offset-value", this.calculateCO2Offset(), {
-        ...countUpOptions,
-        decimalPlaces: 2,
-      }),
-
-      roofArea: new CountUp("roof-area-value", this.calculateRoofArea(), {
-        ...countUpOptions,
-        decimalPlaces: 0,
-      })
-    };
-  }
-
-  startCountUps() {
-    Object.values(this.countUps).forEach(countUp => {
-      if (countUp && !countUp.error) {
-        countUp.start();
-      }
-    });
-  }
-
-  calculateCO2Offset() {
-    const annualProduction = this.billData.estimatedAnnualProduction;
-    const co2PerKWh = 0.0007; // tons of CO2 per kWh (average US grid)
-    return (annualProduction * co2PerKWh);
-  }
-
-  calculateRoofArea() {
-    const panelArea = 17.5; // average area of a single solar panel in sq ft
-    return this.billData.numberOfPanels * panelArea;
-  }
-
 
   startAnimations() {
     // Initialize GSAP timeline for card animations

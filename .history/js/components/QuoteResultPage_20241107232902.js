@@ -20,7 +20,17 @@ export class QuoteResultPage {
     const app = document.getElementById("app");
     app.innerHTML = `
       <div class="h-screen w-screen bg-white transition-colors duration-1000 overflow-hidden" id="quote-result-page">
-        
+        <!-- Logo Section -->
+        <div class="absolute top-8 left-12 flex items-center gap-2 z-10">
+          <svg class="w-12 h-12" viewBox="0 0 60 50">
+            <path d="M30,20 C25,10 35,0 45,10 L55,20 C65,30 55,40 45,30 Z" 
+                fill="#00a651"/>
+          </svg>
+          <div>
+            <h1 class="text-2xl font-bold text-primary">ENERGY COVE</h1>
+            <p class="text-sm italic text-gray-600">Energy for Life</p>
+          </div>
+        </div>
 
         <!-- Main Content -->
         <div class="h-full w-full flex relative" id="main-content">

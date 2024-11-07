@@ -321,7 +321,7 @@ export class ReferenceInputPage {
 
   getLogoTemplate() {
     return `
-        <img src="/assets/logo.svg" alt="Logo" class="logo-icon -ml-8 -mt-8" style="width: 13rem; height: 13rem;" />
+        <img src="/assets/logo.svg" alt="Logo" class="logo-icon" style="width: 13rem; height: 13rem;" />
         
     `;
   }
@@ -429,7 +429,20 @@ export class ReferenceInputPage {
 
   getWaveTemplate() {
     return `
-        
+        <div class="absolute bottom-0 w-full">
+            <svg class="wave-animation" viewBox="0 0 1200 100" preserveAspectRatio="none">
+                <path 
+                    d="M0,20 C200,0 400,40 600,20 S800,0 1200,20 L1200,100 L0,100 Z"
+                    fill="var(--color-primary)"
+                    opacity="0.3"
+                />
+                <path 
+                    d="M0,40 C200,20 400,60 600,40 S800,20 1200,40 L1200,100 L0,100 Z"
+                    fill="var(--color-yellow)"
+                    opacity="0.5"
+                />
+            </svg>
+        </div>
     `;
   }
 

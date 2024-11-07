@@ -321,8 +321,14 @@ export class ReferenceInputPage {
 
   getLogoTemplate() {
     return `
-        <img src="/assets/logo.svg" alt="Logo" class="logo-icon -ml-8 -mt-8" style="width: 13rem; height: 13rem;" />
-        
+        <svg class="logo-icon" viewBox="0 0 60 50">
+            <path d="M30,20 C25,10 35,0 45,10 L55,20 C65,30 55,40 45,30 Z" 
+                fill="var(--color-primary)"/>
+        </svg>
+        <div class="logo-text">
+            <h1>ENERGY COVE</h1>
+            <p>Energy for Life</p>
+        </div>
     `;
   }
 
@@ -429,7 +435,20 @@ export class ReferenceInputPage {
 
   getWaveTemplate() {
     return `
-        
+        <div class="absolute bottom-0 w-full">
+            <svg class="wave-animation" viewBox="0 0 1200 100" preserveAspectRatio="none">
+                <path 
+                    d="M0,20 C200,0 400,40 600,20 S800,0 1200,20 L1200,100 L0,100 Z"
+                    fill="var(--color-primary)"
+                    opacity="0.3"
+                />
+                <path 
+                    d="M0,40 C200,20 400,60 600,40 S800,20 1200,40 L1200,100 L0,100 Z"
+                    fill="var(--color-yellow)"
+                    opacity="0.5"
+                />
+            </svg>
+        </div>
     `;
   }
 
@@ -619,6 +638,14 @@ export class ReferenceInputPage {
     }
   }
 
+  async fetchBillData() {
+    try {
+      // Call the fetchBillData function from your store
+      await window.fetchBillData(this.state.referenceNumber);
+    } catch (error) {
+      throw new Error("Failed to fetch bill data");
+    }
+  }
 
   setState(newState) {
     this.state = { ...this.state, ...newState };

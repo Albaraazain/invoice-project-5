@@ -6,7 +6,7 @@ export class BillPreview {
   render(container) {
     container.innerHTML = `
       <div class="flex h-full w-full items-center justify-center p-4">
-        <div class="w-full max-w-4xl min-h-[900px] bg-white rounded-lg shadow-md p-6 flex flex-col">
+        <div class="w-full max-w-[210mm] min-h-[100mm] bg-white rounded-lg shadow-md p-6 aspect-[1/1.2] flex flex-col">
           <div class="flex justify-between items-center mb-4">
             <div class="text-2xl font-bold text-gray-800">MEPCO</div>
             <div class="text-sm text-gray-600">Bill #${this.billData.referenceNumber}</div>
