@@ -1,22 +1,22 @@
 import {
-  fetchBillData,
-  getIsLoading,
-  getError,
-} from "../store/solarSizingState.js";
-
-export class ReferenceInputPage {
-  constructor() {
-    this.name = "";
-    this.phone = "";
-    this.email = "";
-    this.referenceNumber = "";
-    this.isLoading = false;
-    this.error = null;
-  }
-
-  render() {
-    const app = document.getElementById("app");
-    app.innerHTML = `
+    fetchBillData,
+    getIsLoading,
+    getError,
+  } from "../store/solarSizingState.js";
+  
+  export class ReferenceInputPage {
+    constructor() {
+      this.name = "";
+      this.phone = "";
+      this.email = "";
+      this.referenceNumber = "";
+      this.isLoading = false;
+      this.error = null;
+    }
+  
+    render() {
+      const app = document.getElementById("app");
+      app.innerHTML = `
         <div class="sap_form">
           <div class="container mx-auto px-6 md:px-10">
             <!-- Mobile Contact Icons -->
@@ -136,301 +136,108 @@ export class ReferenceInputPage {
           </div>
         </div>
       `;
-
-    this.attachEventListeners();
-    this.attachStyles();
-  }
-
-  attachEventListeners() {
-    const form = document.getElementById("solar-sizing-form");
-    form.addEventListener("submit", this.handleSubmit.bind(this));
-
-    const inputs = form.querySelectorAll("input");
-    inputs.forEach((input) => {
-      input.addEventListener("input", this.handleInput.bind(this));
-      input.addEventListener("focus", this.handleFocus.bind(this));
-      input.addEventListener("blur", this.handleBlur.bind(this));
-    });
-  }
-
-  handleInput(event) {
-    this[event.target.id] = event.target.value;
-  }
-
-  handleFocus(event) {
-    event.target.parentElement.classList.add("focused");
-  }
-
-  handleBlur(event) {
-    if (!event.target.value) {
-      event.target.parentElement.classList.remove("focused");
+  
+      this.attachEventListeners();
+      this.attachStyles();
     }
-  }
-
-  async handleSubmit(event) {
-    event.preventDefault();
-
-    if (this.isFormValid()) {
-      this.isLoading = true;
-      this.renderLoadingState();
-
-      try {
-        await fetchBillData(this.referenceNumber);
-        console.log("Navigating to /quote");
-        window.router.push("/quote");
-      } catch (err) {
-        console.error("Error generating quote:", err);
-        this.error = "Error generating quote. Please try again.";
-        this.renderError();
-      } finally {
-        this.isLoading = false;
-        this.renderLoadingState();
+  
+    attachEventListeners() {
+      const form = document.getElementById("solar-sizing-form");
+      form.addEventListener("submit", this.handleSubmit.bind(this));
+  
+      const inputs = form.querySelectorAll("input");
+      inputs.forEach((input) => {
+        input.addEventListener("input", this.handleInput.bind(this));
+        input.addEventListener("focus", this.handleFocus.bind(this));
+        input.addEventListener("blur", this.handleBlur.bind(this));
+      });
+    }
+  
+    handleInput(event) {
+      this[event.target.id] = event.target.value;
+    }
+  
+    handleFocus(event) {
+      event.target.parentElement.classList.add("focused");
+    }
+  
+    handleBlur(event) {
+      if (!event.target.value) {
+        event.target.parentElement.classList.remove("focused");
       }
-    } else {
-      this.error = "Please fill in all required fields.";
-      this.renderError();
     }
-  }
-
-  isFormValid() {
-    return this.name && this.phone && this.email && this.referenceNumber;
-  }
-
-  renderLoadingState() {
-    const button = document.querySelector(".get_go");
-    if (this.isLoading) {
-      button.innerHTML = '<span class="animate-pulse">Loading...</span>';
-      button.disabled = true;
-    } else {
-      button.innerHTML = "<span>Get Quote</span>";
-      button.disabled = false;
+  
+    async handleSubmit(event) {
+      event.preventDefault();
+  
+      if (this.isFormValid()) {
+        this.isLoading = true;
+        this.renderLoadingState();
+  
+        try {
+          await fetchBillData(this.referenceNumber);
+          console.log("Navigating to /quote");
+          window.router.push("/quote");
+        } catch (err) {
+          console.error("Error generating quote:", err);
+          this.error = "Error generating quote. Please try again.";
+          this.renderError();
+        } finally {
+          this.isLoading = false;
+          this.renderLoadingState();
+        }
+      } else {
+        this.error = "Please fill in all required fields.";
+        this.renderError();
+      }
     }
-  }
-
-  renderError() {
-    const errorMessage = document.getElementById("error-message");
-    if (this.error) {
-      errorMessage.textContent = this.error;
-      errorMessage.classList.remove("hidden");
-      errorMessage.classList.add("animate-shake");
-      setTimeout(() => {
-        errorMessage.classList.remove("animate-shake");
-      }, 500);
-    } else {
-      errorMessage.classList.add("hidden");
+  
+    isFormValid() {
+      return this.name && this.phone && this.email && this.referenceNumber;
     }
-  }
-
-  attachStyles() {
-    const style = document.createElement("style");
-    style.textContent = `
-        /* Base styles */
-:root {
-  --color-primary: #00a651;
-  --color-primary-light: rgba(0, 166, 81, 0.1);
-  --color-yellow: #ffde17;
-  --color-text: #2c3e50;
-  --color-text-light: #7f8c8d;
-}
-
-.sap_form {
-  min-height: 100vh;
-  background-color: #ffffff;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Container */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 2rem;
-  position: relative;
-}
-
-/* Logo Section */
-.logo-section {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 2rem 0;
-}
-
-.logo-icon {
-  width: 60px;
-  height: 60px;
-}
-
-.logo-text h1 {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: var(--color-text);
-}
-
-.logo-text p {
-  font-size: 0.875rem;
-  color: var(--color-text-light);
-  font-style: italic;
-}
-
-/* Form Section */
-.form-container {
-  padding: 2rem;
-  max-width: 600px;
-}
-
-.form-title {
-  color: var(--color-primary);
-  font-size: 2.25rem;
-  font-weight: bold;
-  margin-bottom: 2rem;
-}
-
-.input-group {
-  margin-bottom: 1.5rem;
-}
-
-.input-group label {
-  display: block;
-  font-size: 0.875rem;
-  color: var(--color-text);
-  margin-bottom: 0.5rem;
-}
-
-.input-group input {
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #e2e8f0;
-  border-radius: 0.375rem;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-}
-
-.input-group input:focus {
-  outline: none;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px var(--color-primary-light);
-}
-
-/* Right Side Content */
-.right-content {
-  background-color: var(--color-primary);
-  padding: 4rem 2rem;
-  color: white;
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 33.333%;
-}
-
-.right-content h3 {
-  font-size: 1.5rem;
-  line-height: 1.4;
-  margin-bottom: 2rem;
-}
-
-.powered-by {
-  position: absolute;
-  bottom: 4rem;
-  font-weight: bold;
-  font-size: 1.5rem;
-}
-
-/* Submit Button */
-.submit-button {
-  width: 100%;
-  padding: 1rem;
-  background-color: var(--color-primary);
-  color: white;
-  border: none;
-  border-radius: 9999px;
-  font-size: 1.125rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.submit-button:hover {
-  transform: scale(1.02);
-  background-color: #008c44;
-}
-
-/* Decorative Waves */
-.wave-decoration {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 120px;
-  overflow: hidden;
-}
-
-.wave {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 100%;
-}
-
-.wave-1 {
-  background: var(--color-primary);
-  opacity: 0.3;
-  clip-path: path('M0,64 C200,44 400,84 600,64 S800,44 1200,64 L1200,100 L0,100 Z');
-}
-
-.wave-2 {
-  background: var(--color-yellow);
-  opacity: 0.5;
-  clip-path: path('M0,74 C200,54 400,94 600,74 S800,54 1200,74 L1200,100 L0,100 Z');
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .container {
-    grid-template-columns: 1fr;
-    padding: 1rem;
-  }
-
-  .right-content {
-    position: relative;
-    width: 100%;
-    padding: 2rem 1rem;
-  }
-
-  .form-title {
-    font-size: 1.875rem;
-  }
-
-  .powered-by {
-    position: relative;
-    bottom: auto;
-    margin-top: 2rem;
-  }
-}
-
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slideUp {
-  from { transform: translateY(20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.5s ease-out;
-}
-
-.animate-slide-up {
-  animation: slideUp 0.5s ease-out;
-}
+  
+    renderLoadingState() {
+      const button = document.querySelector(".get_go");
+      if (this.isLoading) {
+        button.innerHTML = '<span class="animate-pulse">Loading...</span>';
+        button.disabled = true;
+      } else {
+        button.innerHTML = "<span>Get Quote</span>";
+        button.disabled = false;
+      }
+    }
+  
+    renderError() {
+      const errorMessage = document.getElementById("error-message");
+      if (this.error) {
+        errorMessage.textContent = this.error;
+        errorMessage.classList.remove("hidden");
+        errorMessage.classList.add("animate-shake");
+        setTimeout(() => {
+          errorMessage.classList.remove("animate-shake");
+        }, 500);
+      } else {
+        errorMessage.classList.add("hidden");
+      }
+    }
+  
+    attachStyles() {
+      const style = document.createElement("style");
+      style.textContent = `
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideInLeft { from { transform: translateX(-50px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes slideInRight { from { transform: translateX(50px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); } 20%, 40%, 60%, 80% { transform: translateX(10px); } }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+  
+        .animate-fadeIn { animation: fadeIn 0.5s ease-out; }
+        .animate-slideInLeft { animation: slideInLeft 0.5s ease-out; }
+        .animate-slideInRight { animation: slideInRight 0.5s ease-out; }
+        .animate-bounce { animation: bounce 2s infinite; }
+        .animate-shake { animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both; }
+        .animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
       `;
-    document.head.appendChild(style);
+      document.head.appendChild(style);
+    }
   }
-}
