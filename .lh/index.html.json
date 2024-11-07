@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 11,
+            "activePatchIndex": 12,
             "patches": [
                 {
                     "date": 1728989700830,
@@ -52,6 +52,10 @@
                 {
                     "date": 1729103617900,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,10 +9,10 @@\n       href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css\"\n     />\n \n     <link rel=\"stylesheet\" href=\"/src/input.css\" />\n-    <!-- <script src=\"https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js\"></script> -->\n-    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js\"></script>\n+    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js\"></script>\n+    <!-- <script src=\"https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js\"></script> -->\n     <script src=\"https://cdnjs.cloudflare.com/ajax/libs/progressbar.js/1.1.0/progressbar.min.js\"></script>\n   </head>\n   <body>\n     <div id=\"app\" class=\"theme theme-light bg-[--color-bg] text-[--color-fg]\">\n@@ -20,5 +20,5 @@\n     </div>\n     <div id=\"toasts\"></div>\n     <script type=\"module\" src=\"/js/main.js\"></script>\n   </body>\n-</html>\n\\ No newline at end of file\n+</html>\n"
+                },
+                {
+                    "date": 1731007521104,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,9 @@\n     <link\n       rel=\"stylesheet\"\n       href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css\"\n     />\n+    <link rel=\"stylesheet\" href=\"styles.css\">\n \n     <link rel=\"stylesheet\" href=\"/src/input.css\" />\n     <script src=\"https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js\"></script>\n     <!-- <script src=\"https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js\"></script> -->\n"
                 }
             ],
             "date": 1728989700830,

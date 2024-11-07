@@ -6,86 +6,51 @@ class ReferenceInputPage {
           whatsapp: '',
           isLoading: false
       };
-
-      // Inject CSS when the class is instantiated
-      this.injectStyles();
-  }
-
-  injectStyles() {
-      const style = document.createElement('style');
-      style.textContent = `
-          iframe {
-              border-radius: 20px !important;
-          }
-          .player {
-              border-radius: 10px !important;
-          }
-          .main-content:before {
-              animation: grain 4s steps(10) infinite;
-              background-image: url(https://old.yamateos.fr/wp-content/uploads/2021/10/Sans-titre-noise2.jpg);
-              content: "";
-              height: 350%;
-              left: -50%;
-              opacity: 0.02;
-              position: fixed;
-              top: -150%;
-              width: 300%;
-              z-index: 999 !important;
-              pointer-events: none;
-          }
-
-          @keyframes grain {
-              0%, 100% {
-                  transform: translate(0, 0);
-              }
-              10% {
-                  transform: translate(-5%, -10%);
-              }
-              20% {
-                  transform: translate(-15%, 5%);
-              }
-              30% {
-                  transform: translate(7%, -25%);
-              }
-              40% {
-                  transform: translate(-5%, 25%);
-              }
-              50% {
-                  transform: translate(-15%, 10%);
-              }
-              60% {
-                  transform: translate(15%, 0%);
-              }
-              70% {
-                  transform: translate(0%, 15%);
-              }
-              80% {
-                  transform: translate(3%, 35%);
-              }
-              90% {
-                  transform: translate(-10%, 10%);
-              }
-          }
-
-          .char {
-              transform: translateY(115px);
-              transition: transform 0.5s;
-          }
-
-          ::selection {
-              background-color: #e95012;
-          }
-      `;
-      document.head.appendChild(style);
   }
 
   render() {
       const app = document.getElementById("app");
       app.innerHTML = `
-          <div class="relative w-full h-screen bg-white overflow-hidden main-content">
+          <!-- Background Gradient and Grain -->
+          <div class="fixed inset-0 w-full h-full">
+              <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 700 700" preserveAspectRatio="none">
+                  <defs>
+                      <linearGradient gradientTransform="rotate(-67, 0.5, 0.5)" x1="50%" y1="0%" x2="50%" y2="100%" id="gggrain-gradient2">
+                          <stop stop-color="hsla(108, 83%, 49%, 0.85)" stop-opacity="1" offset="-0%"></stop>
+                          <stop stop-color="rgba(255,255,255,0)" stop-opacity="0" offset="100%"></stop>
+                      </linearGradient>
+                      <linearGradient gradientTransform="rotate(67, 0.5, 0.5)" x1="50%" y1="0%" x2="50%" y2="100%" id="gggrain-gradient3">
+                          <stop stop-color="hsl(184, 100%, 50%)" stop-opacity="1"></stop>
+                          <stop stop-color="rgba(255,255,255,0)" stop-opacity="0" offset="100%"></stop>
+                      </linearGradient>
+                      <filter id="gggrain-filter" x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                          <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" seed="2" stitchTiles="stitch" x="0%" y="0%" width="100%" height="100%" result="turbulence"></feTurbulence>
+                          <feColorMatrix type="saturate" values="0" x="0%" y="0%" width="100%" height="100%" in="turbulence" result="colormatrix"></feColorMatrix>
+                          <feComponentTransfer x="0%" y="0%" width="100%" height="100%" in="colormatrix" result="componentTransfer">
+                              <feFuncR type="linear" slope="3"></feFuncR>
+                              <feFuncG type="linear" slope="3"></feFuncG>
+                              <feFuncB type="linear" slope="3"></feFuncB>
+                          </feComponentTransfer>
+                          <feColorMatrix x="0%" y="0%" width="100%" height="100%" in="componentTransfer" result="colormatrix2" type="matrix" values="1 0 0 0 0
+                                  0 1 0 0 0
+                                  0 0 1 0 0
+                                  0 0 0 24 -16"></feColorMatrix>
+                      </filter>
+                  </defs>
+                  <g>
+                      <rect width="100%" height="100%" fill="hsl(84, 100%, 60%)"></rect>
+                      <rect width="100%" height="100%" fill="url(#gggrain-gradient3)"></rect>
+                      <rect width="100%" height="100%" fill="url(#gggrain-gradient2)"></rect>
+                      <rect width="100%" height="100%" fill="transparent" filter="url(#gggrain-filter)" opacity="0.53" style="mix-blend-mode: normal"></rect>
+                  </g>
+              </svg>
+          </div>
+
+          <!-- Main Content -->
+          <div class="relative w-full h-screen overflow-hidden">
               <!-- Logo Section -->
               <div class="absolute top-8 left-12 flex items-center gap-2 z-10">
-                  <svg class="w-12 h-12 player" viewBox="0 0 60 50">
+                  <svg class="w-12 h-12" viewBox="0 0 60 50">
                       <path d="M30,20 C25,10 35,0 45,10 L55,20 C65,30 55,40 45,30 Z" 
                           class="fill-emerald-500"/>
                   </svg>
@@ -98,47 +63,48 @@ class ReferenceInputPage {
               <!-- Main Content Grid -->
               <div class="flex h-full">
                   <!-- Left Section (2/3) -->
-                  <div class="w-2/3 p-8 flex items-center justify-center">
-                      <div class="max-w-md w-full">
+                  <div class="w-2/3 p-8 flex items-center justify-center relative">
+                      <!-- Glass morphism card -->
+                      <div class="max-w-md w-full p-8 rounded-xl backdrop-blur-sm bg-white/30 shadow-xl border border-white/20">
                           <!-- Form Section -->
-                          <h2 class="text-4xl font-bold text-emerald-500 mb-8">Get your quote</h2>
+                          <h2 class="text-4xl font-bold text-emerald-700 mb-8">Get your quote</h2>
                           <form id="quote-form" class="space-y-6">
                               <!-- Provider Field -->
                               <div class="space-y-2">
-                                  <label class="block text-sm text-gray-600">
+                                  <label class="block text-sm text-gray-700 font-medium">
                                       Choose your electricity Provider
                                   </label>
                                   <input type="text" 
                                       id="provider"
-                                      class="w-full h-10 px-4 rounded border border-gray-300 focus:outline-none focus:border-emerald-500 transition-colors"
+                                      class="w-full h-10 px-4 rounded-lg border border-white/50 bg-white/50 backdrop-blur-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/30 transition-all"
                                       placeholder="e.g., MEPCO">
                               </div>
 
                               <!-- Reference Number Field -->
                               <div class="space-y-2">
-                                  <label class="block text-sm text-gray-600">
+                                  <label class="block text-sm text-gray-700 font-medium">
                                       Enter your bill reference number
                                   </label>
                                   <input type="text" 
                                       id="referenceNumber"
-                                      class="w-full h-10 px-4 rounded border border-gray-300 focus:outline-none focus:border-emerald-500 transition-colors"
+                                      class="w-full h-10 px-4 rounded-lg border border-white/50 bg-white/50 backdrop-blur-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/30 transition-all"
                                       placeholder="Enter reference number">
                               </div>
 
                               <!-- WhatsApp Field -->
                               <div class="space-y-2">
-                                  <label class="block text-sm text-gray-600">
+                                  <label class="block text-sm text-gray-700 font-medium">
                                       Enter your WhatsApp phone Number
                                   </label>
                                   <input type="tel" 
                                       id="whatsapp"
-                                      class="w-full h-10 px-4 rounded border border-gray-300 focus:outline-none focus:border-emerald-500 transition-colors"
+                                      class="w-full h-10 px-4 rounded-lg border border-white/50 bg-white/50 backdrop-blur-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/30 transition-all"
                                       placeholder="+92 XXX XXXXXXX">
                               </div>
 
                               <!-- Submit Button -->
                               <button type="submit" 
-                                  class="w-full h-12 bg-emerald-500 text-white rounded-full font-medium hover:bg-emerald-600 transition-colors flex items-center justify-center gap-2">
+                                  class="w-full h-12 bg-emerald-500 text-white rounded-full font-medium hover:bg-emerald-600 shadow-lg hover:shadow-emerald-500/30 transition-all duration-300 flex items-center justify-center gap-2">
                                   <span>Generate</span>
                                   ${this.state.isLoading ? this.renderSpinner() : ''}
                               </button>
@@ -147,7 +113,7 @@ class ReferenceInputPage {
                   </div>
 
                   <!-- Right Section (1/3) -->
-                  <div class="w-1/3 bg-emerald-500 p-8 flex flex-col relative">
+                  <div class="w-1/3 bg-emerald-500/90 backdrop-blur-md p-8 flex flex-col relative shadow-2xl">
                       <div class="text-white mt-16 space-y-2">
                           <p class="text-2xl leading-relaxed">
                               Our AI tool quickly provides
@@ -168,9 +134,9 @@ class ReferenceInputPage {
               <div class="absolute bottom-0 w-full">
                   <svg class="w-full h-24" viewBox="0 0 1200 100" preserveAspectRatio="none">
                       <path d="M0,20 C200,0 400,40 600,20 S800,0 1200,20 L1200,100 L0,100 Z"
-                          class="fill-emerald-500 opacity-30"/>
+                          class="fill-emerald-500/30"/>
                       <path d="M0,40 C200,20 400,60 600,40 S800,20 1200,40 L1200,100 L0,100 Z"
-                          class="fill-yellow-400 opacity-50"/>
+                          class="fill-yellow-400/50"/>
                   </svg>
               </div>
           </div>
@@ -238,7 +204,7 @@ class ReferenceInputPage {
       const button = document.querySelector('button[type="submit"]');
       if (button) {
           button.innerHTML = isLoading 
-              ? `<span>Processing...</span>${this.renderSpinner()}` 
+              ? `<span>Processing...</span>${this.renderSpinner()}`
               : '<span>Generate</span>';
           button.disabled = isLoading;
       }

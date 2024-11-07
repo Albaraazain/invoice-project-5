@@ -6,77 +6,6 @@ class ReferenceInputPage {
           whatsapp: '',
           isLoading: false
       };
-
-      // Inject CSS when the class is instantiated
-      this.injectStyles();
-  }
-
-  injectStyles() {
-      const style = document.createElement('style');
-      style.textContent = `
-          iframe {
-              border-radius: 20px !important;
-          }
-          .player {
-              border-radius: 10px !important;
-          }
-          .main-content:before {
-              animation: grain 4s steps(10) infinite;
-              background-image: url(https://old.yamateos.fr/wp-content/uploads/2021/10/Sans-titre-noise2.jpg);
-              content: "";
-              height: 350%;
-              left: -50%;
-              opacity: 0.02;
-              position: fixed;
-              top: -150%;
-              width: 300%;
-              z-index: 999 !important;
-              pointer-events: none;
-          }
-
-          @keyframes grain {
-              0%, 100% {
-                  transform: translate(0, 0);
-              }
-              10% {
-                  transform: translate(-5%, -10%);
-              }
-              20% {
-                  transform: translate(-15%, 5%);
-              }
-              30% {
-                  transform: translate(7%, -25%);
-              }
-              40% {
-                  transform: translate(-5%, 25%);
-              }
-              50% {
-                  transform: translate(-15%, 10%);
-              }
-              60% {
-                  transform: translate(15%, 0%);
-              }
-              70% {
-                  transform: translate(0%, 15%);
-              }
-              80% {
-                  transform: translate(3%, 35%);
-              }
-              90% {
-                  transform: translate(-10%, 10%);
-              }
-          }
-
-          .char {
-              transform: translateY(115px);
-              transition: transform 0.5s;
-          }
-
-          ::selection {
-              background-color: #e95012;
-          }
-      `;
-      document.head.appendChild(style);
   }
 
   render() {
@@ -85,7 +14,7 @@ class ReferenceInputPage {
           <div class="relative w-full h-screen bg-white overflow-hidden main-content">
               <!-- Logo Section -->
               <div class="absolute top-8 left-12 flex items-center gap-2 z-10">
-                  <svg class="w-12 h-12 player" viewBox="0 0 60 50">
+                  <svg class="w-12 h-12" viewBox="0 0 60 50">
                       <path d="M30,20 C25,10 35,0 45,10 L55,20 C65,30 55,40 45,30 Z" 
                           class="fill-emerald-500"/>
                   </svg>
@@ -238,7 +167,7 @@ class ReferenceInputPage {
       const button = document.querySelector('button[type="submit"]');
       if (button) {
           button.innerHTML = isLoading 
-              ? `<span>Processing...</span>${this.renderSpinner()}` 
+              ? `<span>Processing...</span>${this.renderSpinner()}`
               : '<span>Generate</span>';
           button.disabled = isLoading;
       }
