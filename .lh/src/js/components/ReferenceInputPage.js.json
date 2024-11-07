@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 1,
+            "activePatchIndex": 3,
             "patches": [
                 {
                     "date": 1731019030943,
@@ -12,6 +12,14 @@
                 {
                     "date": 1731019184731,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -320,9 +320,9 @@\n   }\r\n \r\n   getLogoTemplate() {\r\n     return `\r\n-        <img src=\"/src/assets/logo.svg\" alt=\"Logo\" class=\"logo-icon -ml-8 -mt-8\" style=\"width: 13rem; height: 13rem;\" />\r\n+        <img src=\"/assets/logo.svg\" alt=\"Logo\" class=\"logo-icon -ml-8 -mt-8\" style=\"width: 13rem; height: 13rem;\" />\r\n         \r\n     `;\r\n   }\r\n \r\n"
+                },
+                {
+                    "date": 1731019496092,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -320,9 +320,9 @@\n   }\r\n \r\n   getLogoTemplate() {\r\n     return `\r\n-        <img src=\"/assets/logo.svg\" alt=\"Logo\" class=\"logo-icon -ml-8 -mt-8\" style=\"width: 13rem; height: 13rem;\" />\r\n+        <img src=\"./logo.svg\" alt=\"Logo\" class=\"logo-icon -ml-8 -mt-8\" style=\"width: 13rem; height: 13rem;\" />\r\n         \r\n     `;\r\n   }\r\n \r\n"
+                },
+                {
+                    "date": 1731019611729,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -320,9 +320,9 @@\n   }\r\n \r\n   getLogoTemplate() {\r\n     return `\r\n-        <img src=\"./logo.svg\" alt=\"Logo\" class=\"logo-icon -ml-8 -mt-8\" style=\"width: 13rem; height: 13rem;\" />\r\n+        <img src=\"/src/assets/logo.svg\" alt=\"Logo\" class=\"logo-icon -ml-8 -mt-8\" style=\"width: 13rem; height: 13rem;\" />\r\n         \r\n     `;\r\n   }\r\n \r\n"
                 }
             ],
             "date": 1731019030943,

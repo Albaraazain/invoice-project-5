@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* input[type="text"],
+input[type="tel"],
+input[type="email"] {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="email"]:focus {
+  @apply border-blue-500;
+}
+
+button {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+button:hover {
+  @apply bg-gray-400;
+}
+
+button:disabled {
+  @apply bg-gray-200 text-gray-500 cursor-not-allowed;
+} */

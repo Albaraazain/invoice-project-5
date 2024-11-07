@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 4,
+            "activePatchIndex": 5,
             "patches": [
                 {
                     "date": 1728989687206,
@@ -24,6 +24,10 @@
                 {
                     "date": 1731018950843,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -48,5 +48,5 @@\n       },\n     },\n   },\n   plugins: [],\n-};\n\\ No newline at end of file\n+};\n"
+                },
+                {
+                    "date": 1731019368278,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n /** @type {import('tailwindcss').Config} */\n export default {\n-  content: [\"./index.html\", \"./js/**/*.{js,vue}\"],\n+  content: [\"./index.html\", \"./js/**/*.{js,vue}\", \"./src/**/*.{vue,js,ts,jsx,tsx}\"],\n   theme: {\n     extend: {\n       colors: {\n         \"color-bg\": \"var(--color-bg)\",\n"
                 }
             ],
             "date": 1728989687206,
