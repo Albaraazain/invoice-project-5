@@ -321,7 +321,7 @@ export class ReferenceInputPage {
 
   getLogoTemplate() {
     return `
-        <img src="/assets/logo.svg" alt="Logo" class="logo-icon -ml-8 -mt-8" style="width: 13rem; height: 13rem;" />
+        <img src="/src/assets/logo.svg" alt="Logo" class="logo-icon -ml-8 -mt-8" style="width: 13rem; height: 13rem;" />
         
     `;
   }
