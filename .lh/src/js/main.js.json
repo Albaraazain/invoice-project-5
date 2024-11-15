@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 3,
+            "activePatchIndex": 6,
             "patches": [
                 {
                     "date": 1731018997094,
@@ -20,6 +20,18 @@
                 {
                     "date": 1731613219683,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,30 +8,30 @@\n import { BillReviewPage } from \"./components/BillReviewPage.js\";\r\n \r\n const routes = [\r\n   {\r\n-    path: \"/\",\r\n-    component: () => {\r\n-      console.log(\"Rendering ReferenceInputPage\");\r\n-      const page = new ReferenceInputPage();\r\n-      page.render();\r\n-    },\r\n+      path: \"/\",\r\n+      component: () => {\r\n+          console.log(\"Rendering ReferenceInputPage\");\r\n+          const page = new ReferenceInputPage();\r\n+          page.render();\r\n+      },\r\n   },\r\n   {\r\n-    path: \"/bill-review\",\r\n-    component: () => {\r\n-      console.log(\"Rendering QuoteResultPage\");\r\n-      const page = new BillReviewPage();\r\n-      page.render();\r\n-    },\r\n+      path: \"/bill-review\",\r\n+      component: () => {\r\n+          console.log(\"Rendering BillReviewPage\");\r\n+          const page = new BillReviewPage();\r\n+          page.render();\r\n+      },\r\n   },\r\n   {\r\n-    path: \"/quote\",\r\n-    components: () => {\r\n-      console.log(\"Rendering QuoteResultPage\");\r\n-      const page = new QuoteResultPage();\r\n-      page.render();  \r\n-    }\r\n+      path: \"/quote\",\r\n+      component: () => {\r\n+          console.log(\"Rendering QuoteResultPage\");\r\n+          const page = new QuoteResultPage();\r\n+          page.render();\r\n+      }\r\n   },\r\n ];\r\n \r\n const router = new Router(routes);\r\n"
+                },
+                {
+                    "date": 1731699181939,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import { QuoteResultPage } from \"./components/QuoteResultPage.js\";\r\n import { initializeSolarSizingState } from \"./store/solarSizingState.js\";\r\n import { Toasts } from './components/Toasts.js';\r\n import '../input.css';\r\n-import { BillReviewPage } from \"./components/BillReviewPage.js\";\r\n+import { BillReviewPage } from \"./components/BillReview/BillReviewPage.js\";\r\n \r\n const routes = [\r\n   {\r\n       path: \"/\",\r\n"
+                },
+                {
+                    "date": 1731699235510,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import { gsap } from \"gsap\";\r\n import { Router } from \"./router.js\";\r\n import { ReferenceInputPage } from \"./components/ReferenceInputPage.js\";\r\n import { QuoteResultPage } from \"./components/QuoteResultPage.js\";\r\n-import { initializeSolarSizingState } from \"./store/solarSizingState.js\";\r\n+import { initializeSolarSizingState } from \"../store/solarSizingState.js\";\r\n import { Toasts } from './components/Toasts.js';\r\n import '../input.css';\r\n import { BillReviewPage } from \"./components/BillReview/BillReviewPage.js\";\r\n \r\n"
+                },
+                {
+                    "date": 1731699247537,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import { gsap } from \"gsap\";\r\n import { Router } from \"./router.js\";\r\n import { ReferenceInputPage } from \"./components/ReferenceInputPage.js\";\r\n import { QuoteResultPage } from \"./components/QuoteResultPage.js\";\r\n-import { initializeSolarSizingState } from \"../store/solarSizingState.js\";\r\n+import { initializeSolarSizingState } from \"./store/solarSizingState.js\";\r\n import { Toasts } from './components/Toasts.js';\r\n import '../input.css';\r\n import { BillReviewPage } from \"./components/BillReview/BillReviewPage.js\";\r\n \r\n"
                 }
             ],
             "date": 1731018997094,

@@ -27,14 +27,6 @@ export function getBillData() {
   return null;
 }
 
-export function setAnimationShown() {
-  localStorage.setItem("billReviewAnimationShown", "true");
-}
-
-export function hasAnimationBeenShown() {
-  return localStorage.getItem("billReviewAnimationShown") === "true";
-}
-
 export function saveBillData(billData) {
   console.log("Saving bill data:", billData); // Add this log
   try {

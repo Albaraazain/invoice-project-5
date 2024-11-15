@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/js/components/BillReview/utils/chartconfig.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1731689017745,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1731689640837,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import Chart from 'chart.js/auto';\r\n \r\n export function initializeConsumptionChart(ctx, data, isMobile) {\r\n     const isTablet = window.innerWidth < 1024;\r\n-    \r\n+\r\n     return new Chart(ctx, {\r\n         type: 'line',\r\n         data: {\r\n             labels: data.labels,\r\n"
+                }
+            ],
+            "date": 1731689017745,
+            "name": "Commit-0",
+            "content": "// src/components/BillReview/utils/chartConfig.js\r\nimport Chart from 'chart.js/auto';\r\n\r\nexport function initializeConsumptionChart(ctx, data, isMobile) {\r\n    const isTablet = window.innerWidth < 1024;\r\n    \r\n    return new Chart(ctx, {\r\n        type: 'line',\r\n        data: {\r\n            labels: data.labels,\r\n            datasets: [{\r\n                label: 'Consumption (kWh)',\r\n                data: data.values,\r\n                borderColor: '#059669',\r\n                backgroundColor: 'rgba(5, 150, 105, 0.1)',\r\n                tension: 0.4,\r\n                fill: true,\r\n                pointRadius: isMobile ? 2 : isTablet ? 3 : 4,\r\n                pointHoverRadius: isMobile ? 4 : isTablet ? 5 : 6,\r\n                pointBackgroundColor: '#ffffff',\r\n                pointBorderColor: '#059669',\r\n                pointBorderWidth: isMobile ? 1 : 2,\r\n            }]\r\n        },\r\n        options: {\r\n            responsive: true,\r\n            maintainAspectRatio: false,\r\n            interaction: {\r\n                mode: 'nearest',\r\n                intersect: false,\r\n                axis: 'x'\r\n            },\r\n            plugins: {\r\n                legend: {\r\n                    display: false\r\n                },\r\n                tooltip: {\r\n                    enabled: true,\r\n                    backgroundColor: 'white',\r\n                    titleColor: '#1f2937',\r\n                    bodyColor: '#4b5563',\r\n                    borderColor: '#e5e7eb',\r\n                    borderWidth: 1,\r\n                    padding: isMobile ? 8 : 12,\r\n                    titleFont: {\r\n                        size: isMobile ? 12 : 14,\r\n                        weight: 'bold'\r\n                    },\r\n                    bodyFont: {\r\n                        size: isMobile ? 11 : 13\r\n                    },\r\n                    displayColors: false,\r\n                    callbacks: {\r\n                        label: function(context) {\r\n                            return `${context.parsed.y.toLocaleString()} kWh`;\r\n                        }\r\n                    }\r\n                }\r\n            },\r\n            scales: {\r\n                x: {\r\n                    grid: {\r\n                        display: false\r\n                    },\r\n                    ticks: {\r\n                        font: {\r\n                            size: isMobile ? 10 : isTablet ? 11 : 12\r\n                        }\r\n                    }\r\n                },\r\n                y: {\r\n                    beginAtZero: true,\r\n                    grid: {\r\n                        color: 'rgba(0, 0, 0, 0.05)'\r\n                    },\r\n                    ticks: {\r\n                        font: {\r\n                            size: isMobile ? 10 : isTablet ? 11 : 12\r\n                        },\r\n                        callback: function(value) {\r\n                            return `${value} kWh`;\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    });\r\n}"
+        }
+    ]
+}

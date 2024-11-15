@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/js/components/BillReview/utils/formatters.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1731689191633,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1731689191633,
+            "name": "Commit-0",
+            "content": "// src/components/BillReview/utils/formatters.js\r\nexport function formatCurrency(value) {\r\n    return new Intl.NumberFormat('en-PK', {\r\n        style: 'currency',\r\n        currency: 'PKR',\r\n        minimumFractionDigits: 0,\r\n        maximumFractionDigits: 0\r\n    }).format(value);\r\n}\r\n\r\nexport function formatChange(value) {\r\n    return Number(value).toFixed(1);\r\n}\r\n\r\nexport function formatDate(date) {\r\n    return new Date(date).toLocaleDateString('en-PK', {\r\n        year: 'numeric',\r\n        month: 'long',\r\n        day: 'numeric'\r\n    });\r\n}\r\n\r\nexport function calculateDueDays(dueDate) {\r\n    const today = new Date();\r\n    const due = new Date(dueDate);\r\n    const diffTime = Math.abs(due - today);\r\n    return Math.ceil(diffTime / (1000 * 60 * 60 * 24));\r\n}"
+        }
+    ]
+}

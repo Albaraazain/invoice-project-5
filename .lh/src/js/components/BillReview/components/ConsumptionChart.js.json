@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/js/components/BillReview/components/ConsumptionChart.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1731688877361,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1731692936476,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,18 @@\n+// src/components/BillReview/components/ConsumptionChart.js\r\n+import { html } from 'lit-html';\r\n+\r\n+export function ConsumptionChart(trendData) {\r\n+    return html`\r\n+        <div class=\"bg-white rounded-lg shadow-sm p-4 opacity-0\" id=\"consumption-card\">\r\n+            <div class=\"flex justify-between items-center mb-4\">\r\n+                <h3 class=\"text-sm font-semibold text-gray-900\">Consumption Analysis</h3>\r\n+                <div class=\"px-2 py-1 bg-emerald-50 text-emerald-600 rounded-full text-xs font-medium\">\r\n+                    ${trendData.change}% vs last month\r\n+                </div>\r\n+            </div>\r\n+            <div class=\"relative h-[200px] sm:h-[250px] w-full\">\r\n+                <canvas id=\"consumption-trend-chart\"></canvas>\r\n+            </div>\r\n+        </div>\r\n+    `;\r\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1731698564163,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,23 +14,5 @@\n                 <canvas id=\"consumption-trend-chart\"></canvas>\r\n             </div>\r\n         </div>\r\n     `;\r\n-}\n-// src/components/BillReview/components/ConsumptionChart.js\r\n-import { html } from 'lit-html';\r\n-\r\n-export function ConsumptionChart(trendData) {\r\n-    return html`\r\n-        <div class=\"bg-white rounded-lg shadow-sm p-4 opacity-0\" id=\"consumption-card\">\r\n-            <div class=\"flex justify-between items-center mb-4\">\r\n-                <h3 class=\"text-sm font-semibold text-gray-900\">Consumption Analysis</h3>\r\n-                <div class=\"px-2 py-1 bg-emerald-50 text-emerald-600 rounded-full text-xs font-medium\">\r\n-                    ${trendData.change}% vs last month\r\n-                </div>\r\n-            </div>\r\n-            <div class=\"relative h-[200px] sm:h-[250px] w-full\">\r\n-                <canvas id=\"consumption-trend-chart\"></canvas>\r\n-            </div>\r\n-        </div>\r\n-    `;\r\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1731688877361,
+            "name": "Commit-0",
+            "content": "// src/components/BillReview/components/ConsumptionChart.js\r\nimport { html } from 'lit-html';\r\n\r\nexport function ConsumptionChart(trendData) {\r\n    return html`\r\n        <div class=\"bg-white rounded-lg shadow-sm p-4 opacity-0\" id=\"consumption-card\">\r\n            <div class=\"flex justify-between items-center mb-4\">\r\n                <h3 class=\"text-sm font-semibold text-gray-900\">Consumption Analysis</h3>\r\n                <div class=\"px-2 py-1 bg-emerald-50 text-emerald-600 rounded-full text-xs font-medium\">\r\n                    ${trendData.change}% vs last month\r\n                </div>\r\n            </div>\r\n            <div class=\"relative h-[200px] sm:h-[250px] w-full\">\r\n                <canvas id=\"consumption-trend-chart\"></canvas>\r\n            </div>\r\n        </div>\r\n    `;\r\n}"
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/js/components/BillReview/components/MetricsCard.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1731688900069,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1731688900069,
+            "name": "Commit-0",
+            "content": "// src/components/BillReview/components/MetricsCard.js\r\nimport { html } from 'lit-html';\r\n\r\nexport function MetricsCard({ type, title, value, badge, progress, subtitle }) {\r\n    return html`\r\n        <div class=\"bg-white rounded-lg shadow-sm p-3 opacity-0 consumption-metric\">\r\n            <div class=\"flex items-center justify-between mb-2\">\r\n                <div class=\"w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center\">\r\n                    ${type === 'bill' ? \r\n                        html`<svg class=\"w-4 h-4 text-emerald-500\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\r\n                            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" \r\n                                  d=\"M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2\" />\r\n                        </svg>` :\r\n                        html`<svg class=\"w-4 h-4 text-emerald-500\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\r\n                            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" \r\n                                  d=\"M13 10V3L4 14h7v7l9-11h-7z\" />\r\n                        </svg>`\r\n                    }\r\n                </div>\r\n                <span class=\"px-2 py-1 bg-emerald-50 text-emerald-600 text-xs rounded-full\">\r\n                    ${badge}\r\n                </span>\r\n            </div>\r\n            <p class=\"text-xs text-gray-500 mb-1\">${title}</p>\r\n            <p class=\"text-lg font-bold text-gray-900\">${value}</p>\r\n            ${progress ? html`\r\n                <div class=\"mt-2 h-1 bg-gray-100 rounded\">\r\n                    <div class=\"h-full bg-emerald-500 rounded\" style=\"width: ${progress}%\"></div>\r\n                </div>\r\n            ` : ''}\r\n            ${subtitle ? html`\r\n                <p class=\"text-xs text-gray-500 mt-2\">${subtitle}</p>\r\n            ` : ''}\r\n        </div>\r\n    `;\r\n}"
+        }
+    ]
+}
