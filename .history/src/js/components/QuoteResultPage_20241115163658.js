@@ -24,7 +24,7 @@ export class QuoteResultPage {
     app.innerHTML = `
     <div class="h-screen w-full overflow-hidden bg-gray-50">
         <div class="h-full w-full flex flex-col p-2 sm:p-4 md:p-8">
-            <!-- Header -->
+            <!-- Header - Fixed height -->
             <div class="flex-none mb-4 sm:mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0">
                 <div>
                     <h1 class="text-xl sm:text-2xl font-bold text-gray-900">Solar System Quote</h1>
@@ -41,57 +41,66 @@ export class QuoteResultPage {
                 </button>
             </div>
 
-            <!-- Main Content Area -->
+            <!-- Main Content Area - Scrollable -->
             <div class="flex-1 min-h-0 relative">
                 <div class="absolute inset-0 overflow-auto">
-                    <div class="h-full max-w-[1136px] mx-auto pb-6">
-                        <div class="grid grid-cols-1 lg:grid-cols-[1fr,324px] gap-4 sm:gap-6">
-                            <!-- Left Column -->
-                            <div class="space-y-4 sm:space-y-6">
+                    <div class="max-w-[1136px] mx-auto h-full">
+                        <!-- Bento Grid Layout -->
+                        <div class="h-full flex flex-col lg:flex-row gap-4 sm:gap-6">
+                            <!-- Main Content Area -->
+                            <div class="flex-1 flex flex-col gap-4 sm:gap-6">
                                 <!-- Top Row -->
-                                <div class="grid grid-cols-1 md:grid-cols-[325px,1fr] gap-4 sm:gap-6">
-                                    <!-- System Size & Stats Cards -->
-                                    <div class="grid grid-cols-2 md:grid-cols-1 gap-4 sm:gap-6">
-                                        <div class="bg-white rounded-xl shadow-sm p-4 sm:p-6">
+                                <div class="flex flex-col md:flex-row gap-4 sm:gap-6 h-auto md:h-[45%]">
+                                    <!-- System Size & Cost Overview -->
+                                    <div class="flex flex-row md:flex-col gap-4 sm:gap-6 w-full md:w-[325px]">
+                                        <div class="flex-1 bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 flex flex-col justify-between">
                                             ${this.renderSystemSizeCard()}
                                         </div>
-                                        <div class="bg-white rounded-xl shadow-sm p-4 sm:p-6">
+                                        
+                                        <!-- Quick Stats Card -->
+                                        <div class="flex-1 bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6">
                                             ${this.renderQuickStats()}
                                         </div>
                                     </div>
                                     
-                                    <!-- Production Chart -->
-                                    <div class="bg-white rounded-xl shadow-sm p-4 sm:p-6">
+                                    <!-- Energy Production Chart -->
+                                    <div class="flex-1 bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 min-h-[300px] md:min-h-0">
                                         <h3 class="text-base sm:text-lg font-semibold mb-2 sm:mb-4">Energy Production</h3>
-                                        <div class="h-[250px] md:h-[300px]">
+                                        <div class="h-[calc(100%-2rem)]">
                                             <canvas id="production-chart"></canvas>
                                         </div>
                                     </div>
                                 </div>
 
                                 <!-- Bottom Row -->
-                                <div class="grid grid-cols-1 md:grid-cols-[2fr,1fr] gap-4 sm:gap-6">
-                                    <div class="bg-white rounded-xl shadow-sm p-4 sm:p-6">
+                                <div class="flex flex-col md:flex-row gap-4 sm:gap-6 h-auto md:h-[55%]">
+                                    <!-- Savings Timeline Chart -->
+                                    <div class="flex-[3] bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 min-h-[300px] md:min-h-0">
                                         <h3 class="text-base sm:text-lg font-semibold mb-2 sm:mb-4">Savings Timeline</h3>
-                                        <div class="h-[250px] md:h-[300px]">
+                                        <div class="h-[calc(100%-2rem)]">
                                             <canvas id="savings-chart"></canvas>
                                         </div>
                                     </div>
-                                    <div class="bg-gradient-to-br from-emerald-700 to-emerald-500 rounded-xl shadow-sm p-4 sm:p-6 text-white">
+                                    
+                                    <!-- Environmental Impact -->
+                                    <div class="flex-1 bg-gradient-to-br from-emerald-700 to-emerald-500 rounded-xl sm:rounded-2xl p-4 sm:p-6 text-white">
                                         ${this.renderEnvironmentalImpact()}
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Right Column -->
-                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 sm:gap-6">
-                                <div class="bg-white rounded-xl shadow-sm p-4 sm:p-6">
+                            <!-- Sidebar -->
+                            <div class="w-full lg:w-[324px] flex flex-col sm:flex-row lg:flex-col gap-4 sm:gap-6">
+                                <!-- Monthly Production Analysis -->
+                                <div class="flex-1 lg:h-[55%] bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 min-h-[300px] lg:min-h-0">
                                     <h3 class="text-base sm:text-lg font-semibold mb-2 sm:mb-4">Monthly Production</h3>
-                                    <div class="h-[250px]">
+                                    <div class="h-[calc(100%-2rem)]">
                                         <canvas id="monthly-production-chart"></canvas>
                                     </div>
                                 </div>
-                                <div class="bg-gradient-to-br from-blue-700 to-blue-500 rounded-xl shadow-sm p-4 sm:p-6 text-white">
+                                
+                                <!-- Cost Analysis -->
+                                <div class="flex-1 lg:h-[45%] bg-gradient-to-br from-blue-700 to-blue-500 rounded-xl sm:rounded-2xl p-4 sm:p-6 text-white">
                                     ${this.renderCostAnalysis()}
                                 </div>
                             </div>
@@ -108,33 +117,6 @@ export class QuoteResultPage {
 
     // Also add resize listener
     window.addEventListener("resize", this.handleResize);
-
-    const style = document.createElement("style");
-    style.textContent = `
-    /* Custom Scrollbar Styles */
-    .overflow-auto {
-        scrollbar-width: thin;
-        scrollbar-color: rgba(156, 163, 175, 0.3) transparent;
-    }
-    
-    .overflow-auto::-webkit-scrollbar {
-        width: 6px;
-    }
-    
-    .overflow-auto::-webkit-scrollbar-track {
-        background: transparent;
-    }
-    
-    .overflow-auto::-webkit-scrollbar-thumb {
-        background-color: rgba(156, 163, 175, 0.3);
-        border-radius: 3px;
-    }
-    
-    .overflow-auto::-webkit-scrollbar-thumb:hover {
-        background-color: rgba(156, 163, 175, 0.5);
-    }
-`;
-    document.head.appendChild(style);
   }
 
   // Update the card renderers to be responsive as well
@@ -510,31 +492,46 @@ export class QuoteResultPage {
   }
 
   startAnimations() {
-    // Animate cards entrance with proper class targeting
-    const cards = document.querySelectorAll(".bg-white, .bg-gradient-to-br");
-
-    gsap.fromTo(
-      cards,
-      {
-        opacity: 0,
-        y: 20,
+    // Animate cards entrance
+    gsap.from(".rounded-2xl", {
+      duration: 0.8,
+      opacity: 0,
+      y: 20,
+      stagger: {
+        amount: 0.4,
+        from: "random",
       },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        stagger: 0.1,
-        ease: "power2.out",
-        onComplete: () => {
-          // Start other animations after cards are visible
-          this.startCountUps();
-          if (this.progressBar) {
-            this.progressBar.animate(0.75);
-          }
-        },
-      }
-    );
+      ease: "power3.out",
+    });
+
+    // Animate progress bars
+    gsap.to(".bg-white.h-full.rounded-full", {
+      width: "75%",
+      duration: 1.5,
+      delay: 0.5,
+      ease: "power2.out",
+    });
+
+    // Add hover animations for cards
+    document.querySelectorAll(".rounded-2xl").forEach((card) => {
+      card.addEventListener("mouseenter", () => {
+        gsap.to(card, {
+          scale: 1.01,
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      });
+
+      card.addEventListener("mouseleave", () => {
+        gsap.to(card, {
+          scale: 1,
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      });
+    });
   }
+
   calculateCO2Offset() {
     // Calculate CO2 offset based on annual production
     // Average of 0.7 kg CO2 per kWh
