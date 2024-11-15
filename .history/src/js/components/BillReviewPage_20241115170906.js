@@ -637,14 +637,14 @@ export class BillReviewPage {
           {
             label: "Consumption (kWh)",
             data: trendData.map((d) => d.consumption),
-            borderColor: "#059669", // Changed to emerald-600
-            backgroundColor: "rgba(5, 150, 105, 0.1)", // Changed to emerald-600 with opacity
+            borderColor: "#3b82f6",
+            backgroundColor: "rgba(59, 130, 246, 0.1)",
             tension: 0.4,
             fill: true,
-            pointRadius: 4,
-            pointHoverRadius: 6,
+            pointRadius: 6,
+            pointHoverRadius: 8,
             pointBackgroundColor: "#ffffff",
-            pointBorderColor: "#059669",
+            pointBorderColor: "#3b82f6",
             pointBorderWidth: 2,
           },
         ],

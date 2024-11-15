@@ -23,18 +23,18 @@ export class QuoteResultPage {
     const app = document.getElementById("app");
     app.innerHTML = `
     <div class="h-screen w-full overflow-hidden bg-gray-50">
-        <div class="h-full w-full flex flex-col p-2 sm:p-4 lg:p-8">
+        <div class="h-full w-full flex flex-col p-2 sm:p-4 md:p-8">
             <!-- Header -->
-            <div class="flex-none mb-3 sm:mb-4 lg:mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4">
+            <div class="flex-none mb-4 sm:mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0">
                 <div>
-                    <h1 class="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900">Solar System Quote</h1>
-                    <p class="text-xs sm:text-sm lg:text-base text-gray-500">Based on your consumption analysis</p>
+                    <h1 class="text-xl sm:text-2xl font-bold text-gray-900">Solar System Quote</h1>
+                    <p class="text-sm sm:text-base text-gray-500">Based on your consumption analysis</p>
                 </div>
                 <button 
                     onclick="window.router.push('/bill-review')"
-                    class="inline-flex items-center px-2 py-1 sm:px-3 sm:py-1.5 lg:px-4 lg:py-2 rounded-lg bg-white border border-gray-200 shadow-sm hover:bg-gray-50 transition-colors text-xs sm:text-sm lg:text-base"
+                    class="inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg bg-white border border-gray-200 shadow-sm hover:bg-gray-50 transition-colors text-sm sm:text-base"
                 >
-                    <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                     </svg>
                     Back
@@ -44,54 +44,54 @@ export class QuoteResultPage {
             <!-- Main Content Area -->
             <div class="flex-1 min-h-0 relative">
                 <div class="absolute inset-0 overflow-auto">
-                    <div class="h-full max-w-[1136px] mx-auto pb-4 sm:pb-6">
-                        <div class="grid grid-cols-1 xl:grid-cols-[1fr,324px] gap-3 sm:gap-4 lg:gap-6">
+                    <div class="h-full max-w-[1136px] mx-auto pb-6">
+                        <div class="grid grid-cols-1 lg:grid-cols-[1fr,324px] gap-4 sm:gap-6">
                             <!-- Left Column -->
-                            <div class="space-y-3 sm:space-y-4 lg:space-y-6">
+                            <div class="space-y-4 sm:space-y-6">
                                 <!-- Top Row -->
-                                <div class="grid grid-cols-1 lg:grid-cols-[325px,1fr] gap-3 sm:gap-4 lg:gap-6">
+                                <div class="grid grid-cols-1 md:grid-cols-[325px,1fr] gap-4 sm:gap-6">
                                     <!-- System Size & Stats Cards -->
-                                    <div class="grid grid-cols-2 lg:grid-cols-1 gap-3 sm:gap-4 lg:gap-6">
-                                        <div class="bg-white rounded-lg sm:rounded-xl shadow-sm p-3 sm:p-4 lg:p-6">
+                                    <div class="grid grid-cols-2 md:grid-cols-1 gap-4 sm:gap-6">
+                                        <div class="bg-white rounded-xl shadow-sm p-4 sm:p-6">
                                             ${this.renderSystemSizeCard()}
                                         </div>
-                                        <div class="bg-white rounded-lg sm:rounded-xl shadow-sm p-3 sm:p-4 lg:p-6">
+                                        <div class="bg-white rounded-xl shadow-sm p-4 sm:p-6">
                                             ${this.renderQuickStats()}
                                         </div>
                                     </div>
                                     
                                     <!-- Production Chart -->
-                                    <div class="bg-white rounded-lg sm:rounded-xl shadow-sm p-3 sm:p-4 lg:p-6">
-                                        <h3 class="text-sm sm:text-base lg:text-lg font-semibold mb-2 sm:mb-3 lg:mb-4">Energy Production</h3>
-                                        <div class="h-[200px] sm:h-[250px] lg:h-[300px]">
+                                    <div class="bg-white rounded-xl shadow-sm p-4 sm:p-6">
+                                        <h3 class="text-base sm:text-lg font-semibold mb-2 sm:mb-4">Energy Production</h3>
+                                        <div class="h-[250px] md:h-[300px]">
                                             <canvas id="production-chart"></canvas>
                                         </div>
                                     </div>
                                 </div>
 
                                 <!-- Bottom Row -->
-                                <div class="grid grid-cols-1 lg:grid-cols-[2fr,1fr] gap-3 sm:gap-4 lg:gap-6">
-                                    <div class="bg-white rounded-lg sm:rounded-xl shadow-sm p-3 sm:p-4 lg:p-6">
-                                        <h3 class="text-sm sm:text-base lg:text-lg font-semibold mb-2 sm:mb-3 lg:mb-4">Savings Timeline</h3>
-                                        <div class="h-[200px] sm:h-[250px] lg:h-[300px]">
+                                <div class="grid grid-cols-1 md:grid-cols-[2fr,1fr] gap-4 sm:gap-6">
+                                    <div class="bg-white rounded-xl shadow-sm p-4 sm:p-6">
+                                        <h3 class="text-base sm:text-lg font-semibold mb-2 sm:mb-4">Savings Timeline</h3>
+                                        <div class="h-[250px] md:h-[300px]">
                                             <canvas id="savings-chart"></canvas>
                                         </div>
                                     </div>
-                                    <div class="bg-gradient-to-br from-emerald-700 to-emerald-500 rounded-lg sm:rounded-xl shadow-sm p-3 sm:p-4 lg:p-6 text-white">
+                                    <div class="bg-gradient-to-br from-emerald-700 to-emerald-500 rounded-xl shadow-sm p-4 sm:p-6 text-white">
                                         ${this.renderEnvironmentalImpact()}
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Right Column -->
-                            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-1 gap-3 sm:gap-4 lg:gap-6">
-                                <div class="bg-white rounded-lg sm:rounded-xl shadow-sm p-3 sm:p-4 lg:p-6">
-                                    <h3 class="text-sm sm:text-base lg:text-lg font-semibold mb-2 sm:mb-3 lg:mb-4">Monthly Production</h3>
-                                    <div class="h-[200px] sm:h-[250px]">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 sm:gap-6">
+                                <div class="bg-white rounded-xl shadow-sm p-4 sm:p-6">
+                                    <h3 class="text-base sm:text-lg font-semibold mb-2 sm:mb-4">Monthly Production</h3>
+                                    <div class="h-[250px]">
                                         <canvas id="monthly-production-chart"></canvas>
                                     </div>
                                 </div>
-                                <div class="bg-gradient-to-br from-blue-700 to-blue-500 rounded-lg sm:rounded-xl shadow-sm p-3 sm:p-4 lg:p-6 text-white">
+                                <div class="bg-gradient-to-br from-blue-700 to-blue-500 rounded-xl shadow-sm p-4 sm:p-6 text-white">
                                     ${this.renderCostAnalysis()}
                                 </div>
                             </div>
@@ -224,6 +224,7 @@ export class QuoteResultPage {
   initializeComponents() {
     if (!this.billData) {
       console.error("No bill data available");
+      // Optionally redirect back to input page
       window.router.push("/");
       return;
     }
@@ -232,8 +233,8 @@ export class QuoteResultPage {
     requestAnimationFrame(() => {
       try {
         this.initCharts();
+        this.initCounters();
         this.initProgressBars();
-        this.initCounters(); // Changed from initCountUps to initCounters
         this.startAnimations();
       } catch (error) {
         console.error("Error initializing components:", error);
@@ -534,7 +535,7 @@ export class QuoteResultPage {
       }
     );
   }
-
+  
   calculateCO2Offset() {
     // Calculate CO2 offset based on annual production
     // Average of 0.7 kg CO2 per kWh

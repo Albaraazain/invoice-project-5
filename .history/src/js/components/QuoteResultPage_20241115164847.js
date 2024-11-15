@@ -224,6 +224,7 @@ export class QuoteResultPage {
   initializeComponents() {
     if (!this.billData) {
       console.error("No bill data available");
+      // Optionally redirect back to input page
       window.router.push("/");
       return;
     }
@@ -232,8 +233,8 @@ export class QuoteResultPage {
     requestAnimationFrame(() => {
       try {
         this.initCharts();
+        this.initCounters();
         this.initProgressBars();
-        this.initCounters(); // Changed from initCountUps to initCounters
         this.startAnimations();
       } catch (error) {
         console.error("Error initializing components:", error);

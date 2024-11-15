@@ -487,7 +487,7 @@ export class BillReviewPage {
             <div class="flex-none mb-3 sm:mb-4 lg:mb-6 opacity-0" id="insights-header">
                 <div class="flex items-center gap-3 sm:gap-4">
                     <div class="flex-shrink-0">
-                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 flex items-center justify-center">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center">
                             <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                             </svg>
@@ -504,7 +504,7 @@ export class BillReviewPage {
             <div class="bg-white/70 backdrop-blur rounded-lg sm:rounded-xl shadow-sm p-3 sm:p-4 lg:p-6 mb-3 sm:mb-4 lg:mb-6 opacity-0" id="progress-tracker">
                 <div class="flex justify-between items-center">
                     <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-emerald-600 flex items-center justify-center text-white font-semibold text-sm sm:text-base">1</div>
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-semibold text-sm sm:text-base">1</div>
                         <div>
                             <p class="font-semibold text-gray-900 text-sm sm:text-base">Bill Review</p>
                             <p class="text-xs sm:text-sm text-gray-500">Analyzing patterns</p>
@@ -527,7 +527,7 @@ export class BillReviewPage {
                 <div class="sm:col-span-2 bg-white rounded-lg sm:rounded-xl shadow-sm p-3 sm:p-4 lg:p-6 opacity-0" id="consumption-card">
                     <div class="flex justify-between items-center mb-3 sm:mb-4">
                         <h3 class="text-sm sm:text-base lg:text-lg font-semibold text-gray-900">Consumption Analysis</h3>
-                        <div class="px-2 py-1 bg-emerald-50 text-emerald-600 rounded-full text-xs sm:text-sm font-medium">
+                        <div class="px-2 py-1 bg-blue-50 text-blue-600 rounded-full text-xs sm:text-sm font-medium">
                             ${this.formatChange(trendData)}% vs last month
                         </div>
                     </div>
@@ -539,31 +539,31 @@ export class BillReviewPage {
                 <!-- Current Bill Card -->
                 <div class="bg-white rounded-lg sm:rounded-xl shadow-sm p-3 sm:p-4 lg:p-6 opacity-0 consumption-metric">
                     <div class="flex items-center justify-between mb-2">
-                        <div class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
-                            <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="w-8 h-8 rounded-lg bg-green-50 flex items-center justify-center">
+                            <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                         </div>
-                        <span class="px-2 py-1 bg-emerald-50 text-emerald-600 text-xs sm:text-sm rounded-full">Due in ${this.calculateDueDays()} days</span>
+                        <span class="px-2 py-1 bg-green-50 text-green-600 text-xs sm:text-sm rounded-full">Due in ${this.calculateDueDays()} days</span>
                     </div>
                     <p class="text-xs sm:text-sm text-gray-500 mb-1">Current Bill</p>
                     <p class="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900">${this.formatCurrency(
                       this.billData.totalAmount
                     )}</p>
                     <div class="mt-4 h-1 bg-gray-100 rounded">
-                        <div class="h-full bg-emerald-500 rounded" style="width: ${this.calculateBillProgress()}%"></div>
+                        <div class="h-full bg-green-500 rounded" style="width: ${this.calculateBillProgress()}%"></div>
                     </div>
                 </div>
 
                 <!-- Units Consumed Card -->
                 <div class="bg-white rounded-lg sm:rounded-xl shadow-sm p-3 sm:p-4 lg:p-6 opacity-0 consumption-metric">
                     <div class="flex items-center justify-between mb-2">
-                        <div class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
-                            <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center">
+                            <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                             </svg>
                         </div>
-                        <span class="px-2 py-1 bg-emerald-50 text-emerald-600 text-xs sm:text-sm rounded-full">
+                        <span class="px-2 py-1 bg-blue-50 text-blue-600 text-xs sm:text-sm rounded-full">
                             ${this.calculateEfficiency()} efficiency
                         </span>
                     </div>
@@ -578,7 +578,7 @@ export class BillReviewPage {
 
                 <!-- Next Steps Card -->
                 <div class="sm:col-span-2 mt-auto">
-                    <div class="bg-gradient-to-br from-emerald-600 to-emerald-700 rounded-lg sm:rounded-xl shadow-sm p-3 sm:p-4 lg:p-6 relative opacity-0" id="next-steps-card">
+                    <div class="bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg sm:rounded-xl shadow-sm p-3 sm:p-4 lg:p-6 relative opacity-0" id="next-steps-card">
                         <div class="absolute -top-2 -right-2">
                             <div class="w-10 h-10 sm:w-12 sm:h-12 animated-gradient rounded-full flex items-center justify-center">
                                 <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -609,7 +609,6 @@ export class BillReviewPage {
         </div>
     `;
 
-    // Update the chart colors in initializeCharts
     this.initializeCharts(trendData);
     this.startInsightAnimations();
     this.attachEventListeners();
@@ -637,14 +636,14 @@ export class BillReviewPage {
           {
             label: "Consumption (kWh)",
             data: trendData.map((d) => d.consumption),
-            borderColor: "#059669", // Changed to emerald-600
-            backgroundColor: "rgba(5, 150, 105, 0.1)", // Changed to emerald-600 with opacity
+            borderColor: "#3b82f6",
+            backgroundColor: "rgba(59, 130, 246, 0.1)",
             tension: 0.4,
             fill: true,
-            pointRadius: 4,
-            pointHoverRadius: 6,
+            pointRadius: 6,
+            pointHoverRadius: 8,
             pointBackgroundColor: "#ffffff",
-            pointBorderColor: "#059669",
+            pointBorderColor: "#3b82f6",
             pointBorderWidth: 2,
           },
         ],
