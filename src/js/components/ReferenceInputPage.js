@@ -1,5 +1,5 @@
 // ReferenceInputPage.js
-import { fetchBillData } from "../store/solarSizingState.js";
+import { fetchBillData, getBillData } from "../store/solarSizingState.js"; // Added getBillData import
 
 export class ReferenceInputPage {
   constructor() {
@@ -576,6 +576,7 @@ export class ReferenceInputPage {
     this.state.whatsapp = value;
   }
 
+  
   async handleSubmit(event) {
     event.preventDefault();
 
@@ -597,29 +598,45 @@ export class ReferenceInputPage {
       return;
     }
 
-    // Start loading state
-    this.setState({ isLoading: true, error: null });
-    this.updateFormState();
-
     try {
+      // Start loading state
+      this.setState({ isLoading: true, error: null });
+      this.updateFormState();
+
       // Show processing animation
       this.showProcessingAnimation();
 
-      // Call the imported fetchBillData function
+      // Call the imported fetchBillData function and wait for it to complete
       await fetchBillData(this.state.referenceNumber);
 
-      // Navigate to quote page on success
-      window.router.push("/quote");
+      // Verify the data was saved properly
+      const billData = getBillData();
+      if (!billData) {
+        throw new Error("Failed to save bill data");
+      }
+
+      // Navigate to bill review page on success
+      window.router.push("/bill-review");
     } catch (error) {
       console.error("Error generating quote:", error);
-      this.showError("Failed to generate quote. Please try again.");
-    } finally {
-      this.setState({ isLoading: false });
+      this.setState({
+        error: "Failed to generate quote. Please try again.",
+        isLoading: false,
+      });
       this.updateFormState();
     }
   }
 
+  showError(message) {
+    this.setState({ error: message });
+    this.updateFormState();
 
+    const form = document.getElementById("quote-form");
+    if (form) {
+      form.classList.add("shake");
+      setTimeout(() => form.classList.remove("shake"), 820);
+    }
+  }
   setState(newState) {
     this.state = { ...this.state, ...newState };
   }

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 8,
+            "activePatchIndex": 9,
             "patches": [
                 {
                     "date": 1729001569549,
@@ -40,6 +40,10 @@
                 {
                     "date": 1729099256384,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,13 +8,13 @@\n     \"build\": \"vite build\",\n     \"preview\": \"vite preview\"\n   },\n   \"dependencies\": {\n-    \"framer-motion\": \"^11.11.9\"\n+    \"gsap\": \"^3.12.2\"\n   },\n   \"devDependencies\": {\n     \"autoprefixer\": \"^10.4.20\",\n     \"postcss\": \"^8.4.47\",\n     \"tailwindcss\": \"^3.4.14\",\n     \"vite\": \"^5.4.8\"\n   }\n-}\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1731673829261,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,13 +8,17 @@\n     \"build\": \"vite build\",\n     \"preview\": \"vite preview\"\n   },\n   \"dependencies\": {\n-    \"gsap\": \"^3.12.2\"\n+    \"chart.js\": \"^4.4.5\",\n+    \"countup.js\": \"^2.8.0\",\n+    \"gsap\": \"^3.12.5\",\n+    \"lightningcss\": \"^1.28.1\",\n+    \"progressbar.js\": \"^1.1.1\"\n   },\n   \"devDependencies\": {\n     \"autoprefixer\": \"^10.4.20\",\n\\ No newline at end of file\n     \"postcss\": \"^8.4.47\",\n     \"tailwindcss\": \"^3.4.14\",\n     \"vite\": \"^5.4.8\"\n   }\n-}\n+}\n"
                 }
             ],
             "date": 1729001569549,

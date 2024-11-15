@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/js/router.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1731613255073,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1731613255073,
+            "name": "Commit-0",
+            "content": "// js/router.js\r\nexport class Router {\r\n    constructor(routes) {\r\n        this.routes = routes;\r\n        this.navigate = this.navigate.bind(this);\r\n        window.addEventListener('popstate', this.navigate);\r\n        window.addEventListener('DOMContentLoaded', this.navigate);\r\n    }\r\n\r\n    navigate() {\r\n        const path = window.location.pathname;\r\n        console.log('Current path:', path);\r\n        const route = this.routes.find(route => route.path === path) || this.routes.find(route => route.path === '/');\r\n        if (route) {\r\n            console.log('Rendering route:', route.path);\r\n            try {\r\n                route.component();\r\n            } catch (error) {\r\n                console.error('Error rendering route:', error);\r\n                this.handleRouteError();\r\n            }\r\n        } else {\r\n            console.error('Route not found for path:', path);\r\n            this.handleRouteError();\r\n        }\r\n    }\r\n\r\n    handleRouteError() {\r\n        const app = document.getElementById(\"app\");\r\n        if (app) {\r\n            app.innerHTML = `\r\n                <div class=\"flex items-center justify-center h-screen\">\r\n                    <div class=\"text-center\">\r\n                        <h2 class=\"text-xl font-semibold text-gray-800 mb-2\">Error</h2>\r\n                        <p class=\"text-gray-600\">Something went wrong. Please try again.</p>\r\n                        <button onclick=\"window.router.push('/')\" \r\n                                class=\"mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors\">\r\n                            Go Back Home\r\n                        </button>\r\n                    </div>\r\n                </div>\r\n            `;\r\n        }\r\n    }\r\n\r\n    push(path) {\r\n        console.log('Pushing new path:', path);\r\n        window.history.pushState(null, '', path);\r\n        this.navigate();\r\n    }\r\n}\r\n"
+        }
+    ]
+}
