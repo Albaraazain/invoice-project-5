@@ -59,11 +59,9 @@ export class BillReviewPage {
                 <p class="text-emerald-600 font-medium">Analyzing your bill...</p>
             </div>
 
-            <!-- Insights Container -->
             <div class="fixed md:relative w-full md:w-1/2 h-[60vh] md:h-full bg-gray-50 rounded-t-3xl md:rounded-none shadow-2xl md:shadow-none" 
                 id="insights-container"
-                style="bottom: 0;">
-                <!-- Drag Handle for mobile -->
+                style="bottom: 0;">  <!-- Removed initial transform -->                <!-- Drag Handle for mobile -->
                 <div class="md:hidden w-full flex justify-center py-2 drag-handle">
                     <div class="w-12 h-1.5 rounded-full bg-gray-300"></div>
                 </div>
@@ -109,10 +107,9 @@ export class BillReviewPage {
                             </div>
                         </div>
                     </div>
-
                     <!-- Main Content Area: Flexible Height -->
                     <div class="flex-1 min-h-0 mt-3">
-                        <div class="h-full grid grid-rows-[auto_auto_1fr] gap-3">
+                        <div class="h-full grid grid-rows-[auto_1fr_auto] gap-3">
                             <!-- Consumption Analysis Card -->
                             <div class="bg-white rounded-lg shadow-sm p-4 opacity-0" id="consumption-card">
                                 <div class="flex justify-between items-center mb-4">
@@ -123,12 +120,12 @@ export class BillReviewPage {
                                         )}% vs last month
                                     </div>
                                 </div>
-                                <div class="relative h-[200px] sm:h-[250px] w-full">
+                                <div class="relative h-[200px] sm:h-[250px] w-full">  <!-- Added relative and w-full -->
                                     <canvas id="consumption-trend-chart"></canvas>
                                 </div>
                             </div>
 
-                            <!-- Metrics Cards Container -->
+                            <!-- Metrics Cards -->
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 <!-- Current Bill Card -->
                                 <div class="bg-white rounded-lg shadow-sm p-3 opacity-0 consumption-metric">
@@ -171,57 +168,28 @@ export class BillReviewPage {
                                 </div>
                             </div>
 
-                            <!-- Solar Quote Card -->
-                            <div class="bg-gradient-to-br from-emerald-600 to-emerald-700 rounded-lg sm:rounded-xl shadow-sm p-4 sm:p-6 lg:p-8 relative overflow-hidden opacity-0" id="next-steps-card">
-                                <!-- Decorative Elements -->
-                                <div class="absolute top-0 right-0 w-64 h-64 opacity-10">
-                                    <svg class="w-full h-full text-white" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                                    </svg>
-                                </div>
-
-                                <div class="relative z-10 flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8">
-                                    <!-- Content Section -->
-                                    <div class="flex-1 space-y-3">
-                                        <div class="flex items-center gap-2">
-                                            <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
-                                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                                                </svg>
-                                            </div>
-                                            <h3 class="text-lg sm:text-xl font-semibold text-white">Ready For Your Solar Quote?</h3>
-                                        </div>
-                                        
-                                        <p class="text-sm sm:text-base text-white/90 leading-relaxed max-w-xl">
-                                            We've analyzed your consumption patterns and can now provide you with a personalized solar solution. Find out how much you could save!
-                                        </p>
-                                        
-                                        <!-- Key Benefits -->
-                                        <div class="flex flex-wrap gap-3 pt-2">
-                                            <div class="inline-flex items-center gap-1.5 bg-white/10 rounded-full px-3 py-1">
-                                                <svg class="w-4 h-4 text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                </svg>
-                                                <span class="text-sm text-white">Personalized Solution</span>
-                                            </div>
-                                            <div class="inline-flex items-center gap-1.5 bg-white/10 rounded-full px-3 py-1">
-                                                <svg class="w-4 h-4 text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2" />
-                                                </svg>
-                                                <span class="text-sm text-white">Cost Savings</span>
-                                            </div>
+                            <!-- Next Steps Card -->
+                            <div class="mt-auto">
+                                <div class="bg-gradient-to-br from-emerald-600 to-emerald-700 rounded-lg shadow-sm p-3 relative opacity-0" id="next-steps-card">
+                                    <div class="absolute -top-2 -right-2">
+                                        <div class="w-10 h-10 animated-gradient rounded-full flex items-center justify-center">
+                                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                                            </svg>
                                         </div>
                                     </div>
-
-                                    <!-- Button Section -->
-                                    <div class="w-full sm:w-auto flex-shrink-0">
+                                    <div class="max-w-lg">
+                                        <h3 class="text-base font-semibold text-white mb-2">Ready For Your Solar Quote?</h3>
+                                        <p class="text-sm text-white/90 mb-4">
+                                            We've analyzed your consumption patterns. Let's see how much you could save with solar energy!
+                                        </p>
                                         <button 
                                             id="proceed-to-quote" 
-                                            class="w-full sm:w-auto bg-white hover:bg-white/90 text-emerald-700 px-6 py-3 rounded-xl font-medium
-                                                   transition-all duration-300 shadow-lg hover:shadow-xl
+                                            class="w-full bg-white/10 hover:bg-white/20 text-white px-4 py-3 rounded-xl font-medium
+                                                   transition-all duration-300 shadow-sm hover:shadow-lg
                                                    flex items-center justify-center gap-2 group"
                                         >
-                                            <span>Generate My Quote</span>
+                                            Generate My Solar Quote
                                             <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                             </svg>
@@ -776,11 +744,11 @@ export class BillReviewPage {
           <!-- Next Steps Card -->
           <div class="sm:col-span-2 mt-auto">
             <div class="bg-gradient-to-br from-emerald-600 to-emerald-700 rounded-lg sm:rounded-xl shadow-sm p-3 sm:p-4 lg:p-6 relative opacity-0" id="next-steps-card">
-                <div class="!w-full !max-w-none !important border-2 !border-red-500">
+                <div class="w-full max-w-none !important border-2 border-red-500">
                 <h3 class="text-base sm:text-lg lg:text-xl font-semibold text-white mb-2">Ready For Your Solar Quote?</h3>
                 <p class="text-sm sm:text-base text-white/90 mb-4">
                   We've analyzed your consumption patterns. Let's see how much you could save with solar energy!
-                </p> 
+                </p>
                 <button 
                   id="proceed-to-quote" 
                   class="w-full bg-white/10 hover:bg-white/20 text-white px-4 py-3 rounded-xl font-medium

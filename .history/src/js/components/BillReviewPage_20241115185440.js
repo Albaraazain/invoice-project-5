@@ -59,11 +59,9 @@ export class BillReviewPage {
                 <p class="text-emerald-600 font-medium">Analyzing your bill...</p>
             </div>
 
-            <!-- Insights Container -->
             <div class="fixed md:relative w-full md:w-1/2 h-[60vh] md:h-full bg-gray-50 rounded-t-3xl md:rounded-none shadow-2xl md:shadow-none" 
                 id="insights-container"
-                style="bottom: 0;">
-                <!-- Drag Handle for mobile -->
+                style="bottom: 0;">  <!-- Removed initial transform -->                <!-- Drag Handle for mobile -->
                 <div class="md:hidden w-full flex justify-center py-2 drag-handle">
                     <div class="w-12 h-1.5 rounded-full bg-gray-300"></div>
                 </div>
@@ -109,10 +107,9 @@ export class BillReviewPage {
                             </div>
                         </div>
                     </div>
-
                     <!-- Main Content Area: Flexible Height -->
                     <div class="flex-1 min-h-0 mt-3">
-                        <div class="h-full grid grid-rows-[auto_auto_1fr] gap-3">
+                        <div class="h-full grid grid-rows-[auto_1fr_auto] gap-3">
                             <!-- Consumption Analysis Card -->
                             <div class="bg-white rounded-lg shadow-sm p-4 opacity-0" id="consumption-card">
                                 <div class="flex justify-between items-center mb-4">
@@ -123,12 +120,12 @@ export class BillReviewPage {
                                         )}% vs last month
                                     </div>
                                 </div>
-                                <div class="relative h-[200px] sm:h-[250px] w-full">
+                                <div class="relative h-[200px] sm:h-[250px] w-full">  <!-- Added relative and w-full -->
                                     <canvas id="consumption-trend-chart"></canvas>
                                 </div>
                             </div>
 
-                            <!-- Metrics Cards Container -->
+                            <!-- Metrics Cards -->
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 <!-- Current Bill Card -->
                                 <div class="bg-white rounded-lg shadow-sm p-3 opacity-0 consumption-metric">
@@ -171,57 +168,28 @@ export class BillReviewPage {
                                 </div>
                             </div>
 
-                            <!-- Solar Quote Card -->
-                            <div class="bg-gradient-to-br from-emerald-600 to-emerald-700 rounded-lg sm:rounded-xl shadow-sm p-4 sm:p-6 lg:p-8 relative overflow-hidden opacity-0" id="next-steps-card">
-                                <!-- Decorative Elements -->
-                                <div class="absolute top-0 right-0 w-64 h-64 opacity-10">
-                                    <svg class="w-full h-full text-white" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                                    </svg>
-                                </div>
-
-                                <div class="relative z-10 flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8">
-                                    <!-- Content Section -->
-                                    <div class="flex-1 space-y-3">
-                                        <div class="flex items-center gap-2">
-                                            <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
-                                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                                                </svg>
-                                            </div>
-                                            <h3 class="text-lg sm:text-xl font-semibold text-white">Ready For Your Solar Quote?</h3>
-                                        </div>
-                                        
-                                        <p class="text-sm sm:text-base text-white/90 leading-relaxed max-w-xl">
-                                            We've analyzed your consumption patterns and can now provide you with a personalized solar solution. Find out how much you could save!
-                                        </p>
-                                        
-                                        <!-- Key Benefits -->
-                                        <div class="flex flex-wrap gap-3 pt-2">
-                                            <div class="inline-flex items-center gap-1.5 bg-white/10 rounded-full px-3 py-1">
-                                                <svg class="w-4 h-4 text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                </svg>
-                                                <span class="text-sm text-white">Personalized Solution</span>
-                                            </div>
-                                            <div class="inline-flex items-center gap-1.5 bg-white/10 rounded-full px-3 py-1">
-                                                <svg class="w-4 h-4 text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2" />
-                                                </svg>
-                                                <span class="text-sm text-white">Cost Savings</span>
-                                            </div>
+                            <!-- Next Steps Card -->
+                            <div class="mt-auto">
+                                <div class="bg-gradient-to-br from-emerald-600 to-emerald-700 rounded-lg shadow-sm p-3 relative opacity-0" id="next-steps-card">
+                                    <div class="absolute -top-2 -right-2">
+                                        <div class="w-10 h-10 animated-gradient rounded-full flex items-center justify-center">
+                                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                                            </svg>
                                         </div>
                                     </div>
-
-                                    <!-- Button Section -->
-                                    <div class="w-full sm:w-auto flex-shrink-0">
+                                    <div class="max-w-lg">
+                                        <h3 class="text-base font-semibold text-white mb-2">Ready For Your Solar Quote?</h3>
+                                        <p class="text-sm text-white/90 mb-4">
+                                            We've analyzed your consumption patterns. Let's see how much you could save with solar energy!
+                                        </p>
                                         <button 
                                             id="proceed-to-quote" 
-                                            class="w-full sm:w-auto bg-white hover:bg-white/90 text-emerald-700 px-6 py-3 rounded-xl font-medium
-                                                   transition-all duration-300 shadow-lg hover:shadow-xl
+                                            class="w-full bg-white/10 hover:bg-white/20 text-white px-4 py-3 rounded-xl font-medium
+                                                   transition-all duration-300 shadow-sm hover:shadow-lg
                                                    flex items-center justify-center gap-2 group"
                                         >
-                                            <span>Generate My Quote</span>
+                                            Generate My Solar Quote
                                             <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                             </svg>
@@ -679,124 +647,131 @@ export class BillReviewPage {
     const trendData = this.generateTrendData();
 
     insightsContainer.innerHTML = `
-      <div class="h-full flex flex-col p-2 sm:p-4 lg:p-6 overflow-auto">
-        <!-- Header Section -->
-        <div class="flex-none mb-3 sm:mb-4 lg:mb-6 opacity-0" id="insights-header">
-          <div class="flex items-center gap-3 sm:gap-4">
-            <div class="flex-shrink-0">
-              <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 flex items-center justify-center">
-                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                </svg>
-              </div>
+        <div class="h-full flex flex-col p-2 sm:p-4 lg:p-6 overflow-auto">
+            <!-- Header Section -->
+            <div class="flex-none mb-3 sm:mb-4 lg:mb-6 opacity-0" id="insights-header">
+                <div class="flex items-center gap-3 sm:gap-4">
+                    <div class="flex-shrink-0">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 flex items-center justify-center">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div>
+                        <h2 class="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900">Bill Analysis</h2>
+                        <p class="text-xs sm:text-sm lg:text-base text-gray-500">Understanding your consumption</p>
+                    </div>
+                </div>
             </div>
-            <div>
-              <h2 class="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900">Bill Analysis</h2>
-              <p class="text-xs sm:text-sm lg:text-base text-gray-500">Understanding your consumption</p>
+
+            <!-- Progress Tracker -->
+            <div class="bg-white/70 backdrop-blur rounded-lg sm:rounded-xl shadow-sm p-3 sm:p-4 lg:p-6 mb-3 sm:mb-4 lg:mb-6 opacity-0" id="progress-tracker">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-emerald-600 flex items-center justify-center text-white font-semibold text-sm sm:text-base">1</div>
+                        <div>
+                            <p class="font-semibold text-gray-900 text-sm sm:text-base">Bill Review</p>
+                            <p class="text-xs sm:text-sm text-gray-500">Analyzing patterns</p>
+                        </div>
+                    </div>
+                    <div class="h-0.5 w-16 sm:w-24 bg-gray-200"></div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 font-semibold text-sm sm:text-base">2</div>
+                        <div>
+                            <p class="font-semibold text-gray-400 text-sm sm:text-base">Solar Quote</p>
+                            <p class="text-xs sm:text-sm text-gray-400">Up next</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
+
+            <!-- Content Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 lg:gap-6 flex-1">
+                <!-- Consumption Analysis Card -->
+                <div class="sm:col-span-2 bg-white rounded-lg sm:rounded-xl shadow-sm p-3 sm:p-4 lg:p-6 opacity-0" id="consumption-card">
+                    <div class="flex justify-between items-center mb-3 sm:mb-4">
+                        <h3 class="text-sm sm:text-base lg:text-lg font-semibold text-gray-900">Consumption Analysis</h3>
+                        <div class="px-2 py-1 bg-emerald-50 text-emerald-600 rounded-full text-xs sm:text-sm font-medium">
+                            ${this.formatChange(trendData)}% vs last month
+                        </div>
+                    </div>
+                    <div class="h-[200px] sm:h-[250px]">
+                        <canvas id="consumption-trend-chart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Current Bill Card -->
+                <div class="bg-white rounded-lg sm:rounded-xl shadow-sm p-3 sm:p-4 lg:p-6 opacity-0 consumption-metric">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
+                            <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <span class="px-2 py-1 bg-emerald-50 text-emerald-600 text-xs sm:text-sm rounded-full">Due in ${this.calculateDueDays()} days</span>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-500 mb-1">Current Bill</p>
+                    <p class="text-lg font-bold text-gray-900" id="bill-amount">${this.formatCurrency(
+                      this.billData.amount
+                    )}</p>
+                    <div class="mt-4 h-1 bg-gray-100 rounded">
+                        <div class="h-full bg-emerald-500 rounded" style="width: ${this.calculateBillProgress()}%"></div>
+                    </div>
+                </div>
+
+                <!-- Units Consumed Card -->
+                <div class="bg-white rounded-lg sm:rounded-xl shadow-sm p-3 sm:p-4 lg:p-6 opacity-0 consumption-metric">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
+                            <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                        </div>
+                        <span class="px-2 py-1 bg-emerald-50 text-emerald-600 text-xs sm:text-sm rounded-full">
+                            ${this.calculateEfficiency()} efficiency
+                        </span>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-500 mb-1">Units Consumed</p>
+                    <p class="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900">${
+                      this.billData.unitsConsumed
+                    } kWh</p>
+                    <p class="text-xs sm:text-sm text-gray-500 mt-2">Rate: ${this.formatCurrency(
+                      this.billData.ratePerUnit
+                    )}/kWh</p>
+                </div>
+
+                <!-- Next Steps Card -->
+                <div class="sm:col-span-2 mt-auto">
+                    <div class="bg-gradient-to-br from-emerald-600 to-emerald-700 rounded-lg sm:rounded-xl shadow-sm p-3 sm:p-4 lg:p-6 relative opacity-0" id="next-steps-card">
+                        <div class="absolute -top-2 -right-2">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 animated-gradient rounded-full flex items-center justify-center">
+                                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="max-w-lg">
+                            <h3 class="text-base sm:text-lg lg:text-xl font-semibold text-white mb-2">Ready For Your Solar Quote?</h3>
+                            <p class="text-sm sm:text-base text-white/90 mb-4">
+                                We've analyzed your consumption patterns. Let's see how much you could save with solar energy!
+                            </p>
+                            <button 
+                                id="proceed-to-quote" 
+                                class="w-full bg-white/10 hover:bg-white/20 text-white px-4 py-3 rounded-xl font-medium
+                                       transition-all duration-300 shadow-sm hover:shadow-lg
+                                       flex items-center justify-center gap-2 group"
+                            >
+                                Generate My Solar Quote
+                                <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <!-- Progress Tracker -->
-        <div class="bg-white/70 backdrop-blur rounded-lg sm:rounded-xl shadow-sm p-3 sm:p-4 lg:p-6 mb-3 sm:mb-4 lg:mb-6 opacity-0" id="progress-tracker">
-          <div class="flex justify-between items-center">
-            <div class="flex items-center gap-3">
-              <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-emerald-600 flex items-center justify-center text-white font-semibold text-sm sm:text-base">1</div>
-              <div>
-                <p class="font-semibold text-gray-900 text-sm sm:text-base">Bill Review</p>
-                <p class="text-xs sm:text-sm text-gray-500">Analyzing patterns</p>
-              </div>
-            </div>
-            <div class="h-0.5 w-16 sm:w-24 bg-gray-200"></div>
-            <div class="flex items-center gap-3">
-              <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 font-semibold text-sm sm:text-base">2</div>
-              <div>
-                <p class="font-semibold text-gray-400 text-sm sm:text-base">Solar Quote</p>
-                <p class="text-xs sm:text-sm text-gray-400">Up next</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Content Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 lg:gap-6 flex-1">
-          <!-- Consumption Analysis Card -->
-          <div class="sm:col-span-2 bg-white rounded-lg sm:rounded-xl shadow-sm p-3 sm:p-4 lg:p-6 opacity-0" id="consumption-card">
-            <div class="flex justify-between items-center mb-3 sm:mb-4">
-              <h3 class="text-sm sm:text-base lg:text-lg font-semibold text-gray-900">Consumption Analysis</h3>
-              <div class="px-2 py-1 bg-emerald-50 text-emerald-600 rounded-full text-xs sm:text-sm font-medium">
-                ${this.formatChange(trendData)}% vs last month
-              </div>
-            </div>
-            <div class="h-[200px] sm:h-[250px]">
-              <canvas id="consumption-trend-chart"></canvas>
-            </div>
-          </div>
-
-          <!-- Current Bill Card -->
-          <div class="bg-white rounded-lg sm:rounded-xl shadow-sm p-3 sm:p-4 lg:p-6 opacity-0 consumption-metric">
-            <div class="flex items-center justify-between mb-2">
-              <div class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
-                <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <span class="px-2 py-1 bg-emerald-50 text-emerald-600 text-xs sm:text-sm rounded-full">Due in ${this.calculateDueDays()} days</span>
-            </div>
-            <p class="text-xs sm:text-sm text-gray-500 mb-1">Current Bill</p>
-            <p class="text-lg font-bold text-gray-900" id="bill-amount">${this.formatCurrency(
-              this.billData.amount
-            )}</p>
-            <div class="mt-4 h-1 bg-gray-100 rounded">
-              <div class="h-full bg-emerald-500 rounded" style="width: ${this.calculateBillProgress()}%"></div>
-            </div>
-          </div>
-
-          <!-- Units Consumed Card -->
-          <div class="bg-white rounded-lg sm:rounded-xl shadow-sm p-3 sm:p-4 lg:p-6 opacity-0 consumption-metric">
-            <div class="flex items-center justify-between mb-2">
-              <div class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
-                <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <span class="px-2 py-1 bg-emerald-50 text-emerald-600 text-xs sm:text-sm rounded-full">
-                ${this.calculateEfficiency()} efficiency
-              </span>
-            </div>
-            <p class="text-xs sm:text-sm text-gray-500 mb-1">Units Consumed</p>
-            <p class="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900">${
-              this.billData.unitsConsumed
-            } kWh</p>
-            <p class="text-xs sm:text-sm text-gray-500 mt-2">Rate: ${this.formatCurrency(
-              this.billData.ratePerUnit
-            )}/kWh</p>
-          </div>
-
-          <!-- Next Steps Card -->
-          <div class="sm:col-span-2 mt-auto">
-            <div class="bg-gradient-to-br from-emerald-600 to-emerald-700 rounded-lg sm:rounded-xl shadow-sm p-3 sm:p-4 lg:p-6 relative opacity-0" id="next-steps-card">
-                <div class="!w-full !max-w-none !important border-2 !border-red-500">
-                <h3 class="text-base sm:text-lg lg:text-xl font-semibold text-white mb-2">Ready For Your Solar Quote?</h3>
-                <p class="text-sm sm:text-base text-white/90 mb-4">
-                  We've analyzed your consumption patterns. Let's see how much you could save with solar energy!
-                </p> 
-                <button 
-                  id="proceed-to-quote" 
-                  class="w-full bg-white/10 hover:bg-white/20 text-white px-4 py-3 rounded-xl font-medium
-                       transition-all duration-300 shadow-sm hover:shadow-lg
-                       flex items-center justify-center gap-2 group"
-                >
-                  Generate My Solar Quote
-                  <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     `;
 
     // Update the chart colors in initializeCharts
@@ -817,120 +792,120 @@ export class BillReviewPage {
 
   initializeCharts(trendData) {
     return new Promise((resolve) => {
-      requestAnimationFrame(() => {
-        const ctx = document.getElementById("consumption-trend-chart");
-        if (!ctx) {
-          console.error("Chart canvas not found");
-          resolve();
-          return;
-        }
+        requestAnimationFrame(() => {
+            const ctx = document.getElementById("consumption-trend-chart");
+            if (!ctx) {
+                console.error("Chart canvas not found");
+                resolve();
+                return;
+            }
 
-        // Ensure the canvas is visible
-        ctx.style.display = "block";
+            // Ensure the canvas is visible
+            ctx.style.display = "block";
 
-        const isMobile = window.innerWidth < 640;
-        const isTablet = window.innerWidth < 1024;
+            const isMobile = window.innerWidth < 640;
+            const isTablet = window.innerWidth < 1024;
 
-        // Destroy existing chart if it exists
-        if (this.charts.consumption) {
-          this.charts.consumption.destroy();
-        }
+            // Destroy existing chart if it exists
+            if (this.charts.consumption) {
+                this.charts.consumption.destroy();
+            }
 
-        // Generate proper monthly data
-        const monthlyData = this.generateMonthlyData();
+            // Generate proper monthly data
+            const monthlyData = this.generateMonthlyData();
 
-        // Create new chart
-        this.charts.consumption = new Chart(ctx, {
-          type: "line",
-          data: {
-            labels: monthlyData.months,
-            datasets: [
-              {
-                label: "Consumption (kWh)",
-                data: monthlyData.values,
-                borderColor: "#059669",
-                backgroundColor: "rgba(5, 150, 105, 0.1)",
-                tension: 0.4,
-                fill: true,
-                pointRadius: isMobile ? 2 : isTablet ? 3 : 4,
-                pointHoverRadius: isMobile ? 4 : isTablet ? 5 : 6,
-                pointBackgroundColor: "#ffffff",
-                pointBorderColor: "#059669",
-                pointBorderWidth: isMobile ? 1 : 2,
-              },
-            ],
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            interaction: {
-              mode: "nearest",
-              intersect: false,
-              axis: "x",
-            },
-            plugins: {
-              legend: {
-                display: false,
-              },
-              tooltip: {
-                enabled: true,
-                backgroundColor: "white",
-                titleColor: "#1f2937",
-                bodyColor: "#4b5563",
-                borderColor: "#e5e7eb",
-                borderWidth: 1,
-                padding: isMobile ? 8 : 12,
-                titleFont: {
-                  size: isMobile ? 12 : 14,
-                  weight: "bold",
+            // Create new chart
+            this.charts.consumption = new Chart(ctx, {
+                type: "line",
+                data: {
+                    labels: monthlyData.months,
+                    datasets: [
+                        {
+                            label: "Consumption (kWh)",
+                            data: monthlyData.values,
+                            borderColor: "#059669",
+                            backgroundColor: "rgba(5, 150, 105, 0.1)",
+                            tension: 0.4,
+                            fill: true,
+                            pointRadius: isMobile ? 2 : isTablet ? 3 : 4,
+                            pointHoverRadius: isMobile ? 4 : isTablet ? 5 : 6,
+                            pointBackgroundColor: "#ffffff",
+                            pointBorderColor: "#059669",
+                            pointBorderWidth: isMobile ? 1 : 2,
+                        },
+                    ],
                 },
-                bodyFont: {
-                  size: isMobile ? 11 : 13,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: "nearest",
+                        intersect: false,
+                        axis: "x",
+                    },
+                    plugins: {
+                        legend: {
+                            display: false,
+                        },
+                        tooltip: {
+                            enabled: true,
+                            backgroundColor: "white",
+                            titleColor: "#1f2937",
+                            bodyColor: "#4b5563",
+                            borderColor: "#e5e7eb",
+                            borderWidth: 1,
+                            padding: isMobile ? 8 : 12,
+                            titleFont: {
+                                size: isMobile ? 12 : 14,
+                                weight: "bold",
+                            },
+                            bodyFont: {
+                                size: isMobile ? 11 : 13,
+                            },
+                            displayColors: false,
+                            callbacks: {
+                                label: function (context) {
+                                    return `${context.parsed.y.toLocaleString()} kWh`;
+                                },
+                            },
+                        },
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false,
+                            },
+                            ticks: {
+                                font: {
+                                    size: isMobile ? 10 : isTablet ? 11 : 12,
+                                },
+                            },
+                        },
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: "rgba(0, 0, 0, 0.05)",
+                            },
+                            ticks: {
+                                font: {
+                                    size: isMobile ? 10 : isTablet ? 11 : 12,
+                                },
+                                callback: function (value) {
+                                    return `${value} kWh`;
+                                },
+                            },
+                        },
+                    },
                 },
-                displayColors: false,
-                callbacks: {
-                  label: function (context) {
-                    return `${context.parsed.y.toLocaleString()} kWh`;
-                  },
-                },
-              },
-            },
-            scales: {
-              x: {
-                grid: {
-                  display: false,
-                },
-                ticks: {
-                  font: {
-                    size: isMobile ? 10 : isTablet ? 11 : 12,
-                  },
-                },
-              },
-              y: {
-                beginAtZero: true,
-                grid: {
-                  color: "rgba(0, 0, 0, 0.05)",
-                },
-                ticks: {
-                  font: {
-                    size: isMobile ? 10 : isTablet ? 11 : 12,
-                  },
-                  callback: function (value) {
-                    return `${value} kWh`;
-                  },
-                },
-              },
-            },
-          },
+            });
+
+            // Resolve promise after chart is initialized
+            this.charts.consumption.options.animation = {
+                onComplete: () => {
+                    resolve();
+                }
+            };
         });
-
-        // Resolve promise after chart is initialized
-        this.charts.consumption.options.animation = {
-          onComplete: () => {
-            resolve();
-          },
-        };
-      });
     });
   }
 
